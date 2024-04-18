@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,22 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId()==R.id.btnRegister){
             if (!validateInput())return;
+            String username = binding.txtRegisterUserName.getEditText().getText().toString();
+            String password = binding.txtRegisterPassword.getEditText().getText().toString();
+            viewModel.addUser(username, password, getContext());
+
+            viewModel.registerDone.observe(requireActivity(),done ->{
+                if (done){
+                    viewModel.verifyLogin(username,password,getContext());
+                    viewModel.verified.observe(requireActivity(),verified -> {
+                        if (verified){
+                            viewModel.showMenu();
+                        }
+                    });
+                }else {
+                    displayAccountAlreadyExists();
+                }
+            } );
         }
         if (v.getId()==R.id.btnRegisterLogin){
             viewModel.showLogin();
@@ -77,5 +94,16 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             binding.txtRegisterRepeatPassword.setErrorEnabled(false);
         }
         return validInput;
+    }
+    private void displayAccountAlreadyExists() {
+        binding.tvAccountAlreadyExists.setVisibility(View.VISIBLE);
+        new CountDownTimer(5000, 5000) {
+
+        public void onTick(long millisUntilFinished) {
+        }
+        public void onFinish() {
+                binding.tvAccountAlreadyExists.setVisibility(View.GONE);
+        }
+        }.start();
     }
 }

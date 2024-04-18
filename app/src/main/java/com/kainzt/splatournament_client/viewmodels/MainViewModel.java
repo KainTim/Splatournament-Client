@@ -28,6 +28,8 @@ public class MainViewModel extends ViewModel {
     public LiveData<Integer> state = _state;
     private final MutableLiveData<Boolean> _verified = new MutableLiveData<>();
     public LiveData<Boolean> verified = _verified;
+    private final MutableLiveData<Boolean> _registerDone = new MutableLiveData<>();
+    public LiveData<Boolean> registerDone = _registerDone;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -52,10 +54,22 @@ public class MainViewModel extends ViewModel {
                 });
         requestQueue.add(stringRequest);
     }
+    public void addUser(String username, String password, Context context) {
+        initQueue(context);
+        String url = SERVER_IP+"/api/users/add-user?username="+username+"&password="+password;
+        StringRequest stringRequest = new StringRequest
+                (Request.Method.POST, url, response -> {
+                    _registerDone.postValue(response.equals("true"));
+                }, volleyError -> {
+                    System.out.println(volleyError.toString());
+                });
+        requestQueue.add(stringRequest);
+    }
 
     private void initQueue(Context context) {
         if (requestQueue == null){
             requestQueue = Volley.newRequestQueue(context);
         }
     }
+
 }

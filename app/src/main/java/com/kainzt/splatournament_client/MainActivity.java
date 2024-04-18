@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             switch (state){
                 case 0: fragmentTransaction.replace(R.id.clMain, LoginFragment.newInstance());
                     break;
-                case 1: fragmentTransaction.replace(R.id.clMain, RegisterFragment.newInstance()).addToBackStack(null);
+                case 1: fragmentTransaction.replace(R.id.clMain, RegisterFragment.newInstance());
                     break;
                 case 2: fragmentTransaction.replace(R.id.clMain, HomeFragment.newInstance());
                     break;
