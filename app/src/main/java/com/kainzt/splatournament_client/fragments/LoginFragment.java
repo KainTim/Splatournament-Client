@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kainzt.splatournament_client.databinding.FragmentLoginFragmentBinding;
+import com.kainzt.splatournament_client.databinding.FragmentLoginBinding;
 
 public class LoginFragment extends Fragment {
-    private FragmentLoginFragmentBinding binding;
+    private FragmentLoginBinding binding;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -30,7 +30,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentLoginFragmentBinding.inflate(inflater, container, false);
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
     }
