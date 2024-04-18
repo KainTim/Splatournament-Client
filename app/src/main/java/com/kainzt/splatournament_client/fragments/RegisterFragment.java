@@ -8,17 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kainzt.splatournament_client.databinding.FragmentLoginFragmentBinding;
-
-public class LoginFragment extends Fragment {
-    private FragmentLoginFragmentBinding binding;
-
-    public LoginFragment() {
+import com.kainzt.splatournament_client.R;
+public class RegisterFragment extends Fragment {
+    public RegisterFragment() {
         // Required empty public constructor
     }
-
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
+    public static RegisterFragment newInstance(String param1, String param2) {
+        return new RegisterFragment();
     }
 
     @Override
@@ -30,8 +26,6 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentLoginFragmentBinding.inflate(inflater, container, false);
-
-        return binding.getRoot();
+        return inflater.inflate(R.layout.fragment_register, container, false);
     }
 }
