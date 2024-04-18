@@ -23,7 +23,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_LOGIN = 0;
     public static final int SHOW_REGISTER = 1;
     public static final int SHOW_MENU = 2;
-    public static final String SERVER_IP = "http://192.168.178.35:8080";
+    public static final String SERVER_IP = "http://192.168.178.35:4711";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
     private final MutableLiveData<Boolean> _verified = new MutableLiveData<>();
