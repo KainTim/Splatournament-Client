@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kainzt.splatournament_client.R;
-import com.kainzt.splatournament_client.databinding.FragmentLoginFragmentBinding;
 import com.kainzt.splatournament_client.databinding.FragmentRegisterBinding;
 
 public class RegisterFragment extends Fragment {

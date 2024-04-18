@@ -1,8 +1,22 @@
 package com.kainzt.splatournament_client.viewmodels;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.kainzt.splatournament_client.dtos.UserDTO;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainViewModel extends ViewModel {
@@ -11,6 +25,9 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_MENU = 2;
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
+    private final MutableLiveData<Boolean> _verified = new MutableLiveData<>();
+    public LiveData<Boolean> verified = _verified;
+
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
     }
@@ -20,8 +37,26 @@ public class MainViewModel extends ViewModel {
     public void showMenu(){
         _state.postValue(SHOW_MENU);
     }
+    private RequestQueue requestQueue;
 
-    public boolean verifyLogin(String username, String password) {
-        return false;
+    public void verifyLogin(String username, String password, Context context){
+        initQueue(context);
+        String url = "http://192.168.60.21:8080/api/users/verify-login?username="+username+"&password="+password;
+
+        StringRequest stringRequest = new StringRequest
+                (Request.Method.GET, url, response -> {
+                    _verified.postValue(response.equals("true"));
+                }, volleyError -> {
+                    System.out.println(volleyError.toString());
+                });
+
+        // Access the RequestQueue through your singleton class.
+        requestQueue.add(stringRequest);
+    }
+
+    private void initQueue(Context context) {
+        if (requestQueue == null){
+            requestQueue = Volley.newRequestQueue(context);
+        }
     }
 }

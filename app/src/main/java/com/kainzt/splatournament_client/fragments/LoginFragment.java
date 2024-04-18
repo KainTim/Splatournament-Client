@@ -58,12 +58,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 binding.txtPassword.setErrorEnabled(false);
             }
             if (!validInput)return;
-            if (viewModel.verifyLogin(binding.txtUsername.getEditText().getText().toString(),
-                    binding.txtPassword.getEditText().getText().toString())) {
-                viewModel.showMenu();
-            }else{
-                binding.tvInvalidPassorUsrName.setVisibility(View.VISIBLE);
-            }
+
+
+            viewModel.verifyLogin(binding.txtUsername.getEditText().getText().toString(),
+                    binding.txtPassword.getEditText().getText().toString(),getContext());
+            viewModel.verified.observe(requireActivity(),verified -> {
+                if (verified){
+                    viewModel.showMenu();
+                }else{
+                    binding.tvInvalidPassorUsrName.setVisibility(View.VISIBLE);
+                }
+            });
+
         }
         if (v.getId() == R.id.btnLoginRegister){
             viewModel.showRegister();
