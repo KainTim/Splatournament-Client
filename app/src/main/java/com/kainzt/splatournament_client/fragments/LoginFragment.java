@@ -45,38 +45,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnLogin){
-            boolean validInput = true;
-            if (binding.txtUsername.getEditText().getText().toString().isEmpty()){
-                binding.txtUsername.setError("Enter a Username!");
-                validInput = false;
-            }else {
-                binding.txtUsername.setErrorEnabled(false);
-            }
-            if (binding.txtPassword.getEditText().getText().toString().isEmpty()){
-                binding.txtPassword.setError("Enter a Password!");
-                validInput = false;
-            }else {
-                binding.txtPassword.setErrorEnabled(false);
-            }
-            if (!validInput)return;
-
+            if (!validateInput()) return;
 
             viewModel.verifyLogin(binding.txtUsername.getEditText().getText().toString(),
                     binding.txtPassword.getEditText().getText().toString(),getContext());
+
+
             viewModel.verified.observe(requireActivity(),verified -> {
                 if (verified){
                     viewModel.showMenu();
                 }else{
                     binding.txtPassword.getEditText().setText("");
-                    binding.tvInvalidPassorUsrName.setVisibility(View.VISIBLE);
-                    new CountDownTimer(5000, 5000) {
-
-                    public void onTick(long millisUntilFinished) {
-                    }
-                    public void onFinish() {
-                            binding.tvInvalidPassorUsrName.setVisibility(View.GONE);
-                    }
-                    }.start();
+                    displayInvalidPassword();
                 }
             });
 
@@ -84,5 +64,34 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.btnLoginRegister){
             viewModel.showRegister();
         }
+    }
+
+    private void displayInvalidPassword() {
+        binding.tvInvalidPassorUsrName.setVisibility(View.VISIBLE);
+        new CountDownTimer(5000, 5000) {
+
+        public void onTick(long millisUntilFinished) {
+        }
+        public void onFinish() {
+                binding.tvInvalidPassorUsrName.setVisibility(View.GONE);
+        }
+        }.start();
+    }
+
+    private boolean validateInput() {
+        boolean validInput = true;
+        if (binding.txtUsername.getEditText().getText().toString().isEmpty()){
+            binding.txtUsername.setError("Enter a Username!");
+            validInput = false;
+        }else {
+            binding.txtUsername.setErrorEnabled(false);
+        }
+        if (binding.txtPassword.getEditText().getText().toString().isEmpty()){
+            binding.txtPassword.setError("Enter a Password!");
+            validInput = false;
+        }else {
+            binding.txtPassword.setErrorEnabled(false);
+        }
+        return validInput;
     }
 }
