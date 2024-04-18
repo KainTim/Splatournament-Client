@@ -23,6 +23,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_LOGIN = 0;
     public static final int SHOW_REGISTER = 1;
     public static final int SHOW_MENU = 2;
+    public static final String SERVER_IP = "http://192.168.178.35:8080";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
     private final MutableLiveData<Boolean> _verified = new MutableLiveData<>();
@@ -41,7 +42,7 @@ public class MainViewModel extends ViewModel {
 
     public void verifyLogin(String username, String password, Context context){
         initQueue(context);
-        String url = "http://192.168.60.21:8080/api/users/verify-login?username="+username+"&password="+password;
+        String url = SERVER_IP+"/api/users/verify-login?username="+username+"&password="+password;
 
         StringRequest stringRequest = new StringRequest
                 (Request.Method.GET, url, response -> {
