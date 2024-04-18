@@ -9,16 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kainzt.splatournament_client.R;
-import com.kainzt.splatournament_client.databinding.FragmentLoginFragmentBinding;
-import com.kainzt.splatournament_client.databinding.FragmentRegisterBinding;
+import com.kainzt.splatournament_client.databinding.FragmentHomeBinding;
 
-public class RegisterFragment extends Fragment {
-    FragmentRegisterBinding binding;
-    public RegisterFragment() {
+public class HomeFragment extends Fragment {
+    FragmentHomeBinding binding;
+
+    public HomeFragment() {
         // Required empty public constructor
     }
-    public static RegisterFragment newInstance() {
-        return new RegisterFragment();
+
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
 
     @Override
@@ -30,7 +31,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding  = FragmentRegisterBinding.inflate(inflater,container,false);
+        binding = FragmentHomeBinding.inflate(inflater,container,false);
 
         return binding.getRoot();
     }
