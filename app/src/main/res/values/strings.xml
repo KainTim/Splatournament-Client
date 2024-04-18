@@ -7,4 +7,5 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="no_account">No Account?</string>
+    <string name="invalid_usrname_pass">Username or Password is Invalid!</string>
 </resources>
