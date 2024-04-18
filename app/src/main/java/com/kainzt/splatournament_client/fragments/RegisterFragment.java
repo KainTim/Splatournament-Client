@@ -3,6 +3,7 @@ package com.kainzt.splatournament_client.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.CountDownTimer;
@@ -52,11 +53,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             viewModel.registerDone.observe(requireActivity(),done ->{
                 if (done){
                     viewModel.verifyLogin(username,password,getContext());
-                    viewModel.verified.observe(requireActivity(),verified -> {
-                        if (verified){
-                            viewModel.showMenu();
-                        }
-                    });
+                    FragmentActivity fragmentActivity = getActivity();
+                    if (fragmentActivity!=null){
+                        viewModel.verified.observe(fragmentActivity, verified -> {
+                            if (verified){
+                                viewModel.showMenu();
+                            }
+                        });
+                    }
                 }else {
                     displayAccountAlreadyExists();
                 }
