@@ -21,7 +21,7 @@ public class MainViewModel extends ViewModel {
         _state.postValue(SHOW_MENU);
     }
 
-    public boolean verifyLogin(String string, String string1) {
+    public boolean verifyLogin(String username, String password) {
         return true;
     }
 }
