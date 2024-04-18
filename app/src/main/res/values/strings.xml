@@ -11,4 +11,6 @@
     <string name="leaderboard">Leaderboard</string>
     <string name="weapons">Weapons</string>
     <string name="splattershot">splattershot</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="already_have_an_account">Already Have an Account?</string>
 </resources>
