@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.btnLogin){
             if (!validateInput()) return;
-
+            Log.d("Clicklistener","got called");
             viewModel.verifyLogin(binding.txtUsername.getEditText().getText().toString(),
                     binding.txtPassword.getEditText().getText().toString(),getContext());
 
