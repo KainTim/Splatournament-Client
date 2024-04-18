@@ -8,4 +8,7 @@
     <string name="register">Register</string>
     <string name="no_account">No Account?</string>
     <string name="invalid_usrname_pass">Username or Password is Invalid!</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="weapons">Weapons</string>
+    <string name="splattershot">splattershot</string>
 </resources>

@@ -49,8 +49,6 @@ public class MainViewModel extends ViewModel {
                 }, volleyError -> {
                     System.out.println(volleyError.toString());
                 });
-
-        // Access the RequestQueue through your singleton class.
         requestQueue.add(stringRequest);
     }
 

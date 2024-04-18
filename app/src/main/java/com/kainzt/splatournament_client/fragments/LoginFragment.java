@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (verified){
                     viewModel.showMenu();
                 }else{
+                    binding.txtPassword.getEditText().setText("");
                     binding.tvInvalidPassorUsrName.setVisibility(View.VISIBLE);
+                    new CountDownTimer(5000, 5000) {
+
+                    public void onTick(long millisUntilFinished) {
+                    }
+                    public void onFinish() {
+                            binding.tvInvalidPassorUsrName.setVisibility(View.GONE);
+                    }
+                    }.start();
                 }
             });
 
