@@ -9,7 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kainzt.splatournament_client.R;
+import com.kainzt.splatournament_client.databinding.FragmentLoginFragmentBinding;
+import com.kainzt.splatournament_client.databinding.FragmentRegisterBinding;
+
 public class RegisterFragment extends Fragment {
+    FragmentRegisterBinding binding;
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -26,6 +30,8 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        binding  = FragmentRegisterBinding.inflate(inflater,container,false);
+
+        return binding.getRoot();
     }
 }
