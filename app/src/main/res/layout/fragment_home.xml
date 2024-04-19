@@ -8,7 +8,7 @@
     tools:context=".fragments.HomeFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvTournament"
+        android:id="@+id/cvMenuTournament"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="20dp"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvTournament">
+        app:layout_constraintTop_toBottomOf="@id/cvMenuTournament">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvMenuLeaderboards"

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     FragmentHomeBinding binding;
 
     public HomeFragment() {
@@ -32,7 +32,22 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container,false);
-
+            binding.cvMenuTournament.setOnClickListener(this);
+            binding.cvMenuLeaderboards.setOnClickListener(this);
+            binding.cvMenuWeapons.setOnClickListener(this);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.cvMenuTournament){
+
+        }
+        if (v.getId() == R.id.cvMenuLeaderboards){
+
+        }
+        if (v.getId() == R.id.cvMenuWeapons){
+
+        }
     }
 }
