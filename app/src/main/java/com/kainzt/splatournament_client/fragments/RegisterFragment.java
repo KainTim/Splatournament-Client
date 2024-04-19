@@ -50,8 +50,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             String password = binding.txtRegisterPassword.getEditText().getText().toString();
             viewModel.addUser(username, password, getContext());
 
-            viewModel.registerDone.observe(requireActivity(),done ->{
-                if (done){
+            viewModel.registerDone.observe(requireActivity(),result ->{
+                if (result){
                     viewModel.verifyLogin(username,password,getContext());
                     FragmentActivity fragmentActivity = getActivity();
                     if (fragmentActivity!=null){
