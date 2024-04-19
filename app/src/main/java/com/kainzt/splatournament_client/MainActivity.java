@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.kainzt.splatournament_client.fragments.HomeFragment;
 import com.kainzt.splatournament_client.fragments.LoginFragment;
 import com.kainzt.splatournament_client.fragments.RegisterFragment;
+import com.kainzt.splatournament_client.fragments.TournamentFragment;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 case 1: fragmentTransaction.replace(R.id.clMain, RegisterFragment.newInstance());
                     break;
                 case 2: fragmentTransaction.replace(R.id.clMain, HomeFragment.newInstance());
+                    break;
+                case 3: fragmentTransaction.replace(R.id.clMain, TournamentFragment.newInstance(1))
+                        .addToBackStack(null);
                     break;
                 default: fragmentTransaction.replace(R.id.clMain,LoginFragment.newInstance());
             }
