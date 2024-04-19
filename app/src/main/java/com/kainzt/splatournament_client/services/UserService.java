@@ -4,17 +4,23 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class UserService {
-    private final String SERVER_IP;
+    private final String SERVER_IP = MainViewModel.SERVER_IP;
 
-    public UserService(String SERVER_IP) {
-        this.SERVER_IP = SERVER_IP;
+    private UserService() {
+    }
+    private static UserService instance;
+    public static UserService getInstance(){
+        if (instance==null) return (instance = new UserService());
+        return instance;
     }
 
     private final MutableLiveData<Boolean> _verified = new MutableLiveData<>();

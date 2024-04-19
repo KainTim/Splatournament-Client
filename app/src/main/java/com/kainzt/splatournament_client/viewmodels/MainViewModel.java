@@ -26,7 +26,7 @@ public class MainViewModel extends ViewModel {
     public static final String SERVER_IP = "http://192.168.60.21:4711";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
-    private final UserService userService = new UserService(SERVER_IP);
+    private final UserService userService = UserService.getInstance();
     public LiveData<Boolean> registerDone = userService.registerDone;
     public LiveData<Boolean> verified = userService.verified;
 
