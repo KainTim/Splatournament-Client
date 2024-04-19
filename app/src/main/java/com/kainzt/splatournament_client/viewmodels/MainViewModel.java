@@ -8,15 +8,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.kainzt.splatournament_client.dtos.UserDTO;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.kainzt.splatournament_client.services.UserService;
 
 
 public class MainViewModel extends ViewModel {
@@ -26,10 +20,9 @@ public class MainViewModel extends ViewModel {
     public static final String SERVER_IP = "http://192.168.60.21:4711";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
-    private final MutableLiveData<Boolean> _verified = new MutableLiveData<>();
-    public LiveData<Boolean> verified = _verified;
-    private final MutableLiveData<Boolean> _registerDone = new MutableLiveData<>();
-    public LiveData<Boolean> registerDone = _registerDone;
+    private final UserService userService = new UserService(SERVER_IP);
+    public LiveData<Boolean> registerDone = userService.registerDone;
+    public LiveData<Boolean> verified = userService.verified;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -40,36 +33,12 @@ public class MainViewModel extends ViewModel {
     public void showMenu(){
         _state.postValue(SHOW_MENU);
     }
-    private RequestQueue requestQueue;
 
     public void verifyLogin(String username, String password, Context context){
-        initQueue(context);
-        String url = SERVER_IP+"/api/users/verify-login?username="+username+"&password="+password;
-
-        StringRequest stringRequest = new StringRequest
-                (Request.Method.GET, url, response -> {
-                    _verified.postValue(response.equals("true"));
-                }, volleyError -> {
-                    System.out.println(volleyError.toString());
-                });
-        requestQueue.add(stringRequest);
+        userService.verifyLogin(username,password,context);
     }
     public void addUser(String username, String password, Context context) {
-        initQueue(context);
-        String url = SERVER_IP+"/api/users/add-user?username="+username+"&password="+password;
-        StringRequest stringRequest = new StringRequest
-                (Request.Method.POST, url, response -> {
-                    _registerDone.postValue(response.equals("true"));
-                }, volleyError -> {
-                    System.out.println(volleyError.toString());
-                });
-        requestQueue.add(stringRequest);
-    }
-
-    private void initQueue(Context context) {
-        if (requestQueue == null){
-            requestQueue = Volley.newRequestQueue(context);
-        }
+        userService.addUser(username,password,context);
     }
 
 }
