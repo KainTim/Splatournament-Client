@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kainzt.splatournament_client.enums.TournamentStyle;
 import com.kainzt.splatournament_client.models.Tournament;
+import com.kainzt.splatournament_client.services.TournamentService;
 import com.kainzt.splatournament_client.services.UserService;
 
 import java.util.ArrayList;
@@ -27,8 +28,10 @@ public class MainViewModel extends ViewModel {
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
     private final UserService userService = UserService.getInstance();
+    private final TournamentService tournamentService = TournamentService.getInstance();
     public LiveData<Boolean> registerDone = userService.registerDone;
     public LiveData<Boolean> verified = userService.verified;
+    public LiveData<List<Tournament>> tournaments = tournamentService.tournaments;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -50,9 +53,4 @@ public class MainViewModel extends ViewModel {
         userService.addUser(username,password,context);
     }
 
-    public List<Tournament> getTournaments() {
-        ArrayList<Tournament> tournaments = new ArrayList<>();
-        tournaments.add(new Tournament(0,"Test",TournamentStyle.SWISS,5,"Me"));
-        return tournaments;
-    }
 }

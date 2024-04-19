@@ -60,7 +60,7 @@ public class TournamentFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.getTournaments()));
+            recyclerView.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments.getValue()));
         }
         return view;
     }
