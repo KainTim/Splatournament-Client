@@ -15,4 +15,10 @@
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="account_already_exists">Account Already Exists!</string>
     <string name="tournaments">Tournaments</string>
+    <string name="dummy">dummy</string>
+    <string name="tournamentname">TournamentName</string>
+    <string name="tournamentstyle">TournamentStyle</string>
+    <string name="tournamentteamcounter">tournamentTeamCounter</string>
+    <string name="createdbyname">CreatedByName</string>
+    <string name="enter_tournament">Enter Tournament</string>
 </resources>

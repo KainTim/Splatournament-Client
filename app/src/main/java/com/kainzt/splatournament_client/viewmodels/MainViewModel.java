@@ -10,6 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.kainzt.splatournament_client.enums.TournamentStyle;
 import com.kainzt.splatournament_client.models.Tournament;
 import com.kainzt.splatournament_client.services.UserService;
 
@@ -50,6 +51,8 @@ public class MainViewModel extends ViewModel {
     }
 
     public List<Tournament> getTournaments() {
-        return new ArrayList<>();
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        tournaments.add(new Tournament(0,"Test",TournamentStyle.SWISS,5,"Me"));
+        return tournaments;
     }
 }
