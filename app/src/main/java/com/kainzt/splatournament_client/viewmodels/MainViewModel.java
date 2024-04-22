@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kainzt.splatournament_client.enums.TournamentStyle;
 import com.kainzt.splatournament_client.models.Tournament;
+import com.kainzt.splatournament_client.services.Hash;
 import com.kainzt.splatournament_client.services.TournamentService;
 import com.kainzt.splatournament_client.services.UserService;
 
@@ -47,9 +48,11 @@ public class MainViewModel extends ViewModel {
     }
 
     public void verifyLogin(String username, String password, Context context){
+        password = Hash.encode(password);
         userService.verifyLogin(username,password,context);
     }
     public void addUser(String username, String password, Context context) {
+        password = Hash.encode(password);
         userService.addUser(username,password,context);
     }
 
