@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentRegisterBinding;
+import com.kainzt.splatournament_client.services.UserService;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
@@ -56,7 +57,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     FragmentActivity fragmentActivity = getActivity();
                     if (fragmentActivity!=null){
                         viewModel.verified.observe(fragmentActivity, verified -> {
-                            if (verified){
+                            if (verified == UserService.STATE_VERIFIED){
                                 viewModel.showMenu();
                             }
                         });

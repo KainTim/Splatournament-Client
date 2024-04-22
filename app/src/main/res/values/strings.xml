@@ -21,4 +21,5 @@
     <string name="tournamentteamcounter">tournamentTeamCounter</string>
     <string name="createdbyname">CreatedByName</string>
     <string name="enter_tournament">Enter Tournament</string>
+    <string name="profile">Profile</string>
 </resources>

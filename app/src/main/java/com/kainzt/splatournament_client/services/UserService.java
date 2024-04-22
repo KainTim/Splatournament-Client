@@ -22,9 +22,12 @@ public class UserService {
         if (instance==null) return (instance = new UserService());
         return instance;
     }
+    public static final int STATE_VERIFIED = 1;
+    public static final int STATE_INVALID = 0;
+    public static final int STATE_INITIAL = -1;
 
-    private final MutableLiveData<Boolean> _verified = new MutableLiveData<>();
-    public LiveData<Boolean> verified = _verified;
+    private final MutableLiveData<Integer> _verified = new MutableLiveData<>(STATE_INITIAL);
+    public LiveData<Integer> verified = _verified;
     private final MutableLiveData<Boolean> _registerDone = new MutableLiveData<>();
     public LiveData<Boolean> registerDone = _registerDone;
     private RequestQueue requestQueue;
@@ -35,7 +38,7 @@ public class UserService {
         String url = SERVER_IP+"/api/users/verify-login?username="+username+"&password="+password;
 
         StringRequest stringRequest = new StringRequest
-                (Request.Method.GET, url, response -> _verified.postValue(response.equals("true")),
+                (Request.Method.GET, url, response -> _verified.postValue(response.equals("true")?STATE_VERIFIED:STATE_INVALID),
                         volleyError -> System.out.println(volleyError.toString()));
         requestQueue.add(stringRequest);
     }

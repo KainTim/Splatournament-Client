@@ -1,5 +1,7 @@
 package com.kainzt.splatournament_client.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentLoginBinding;
+import com.kainzt.splatournament_client.services.UserService;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -40,6 +43,26 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         binding.btnLogin.setOnClickListener(this);
         binding.btnLoginRegister.setOnClickListener(this);
+
+
+        SharedPreferences saveLogin = getContext().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
+        String username = "";
+        String password = "";
+        if (    !(
+                (username = saveLogin.getString("username", "")).isEmpty() ||
+                (password = saveLogin.getString("password", "")).isEmpty())){
+            viewModel.verifyLogin(username,
+                    password,getContext());
+            viewModel.verified.observe(requireActivity(),verified -> {
+                if (verified==UserService.STATE_VERIFIED){
+                    viewModel.showMenu();
+                }else if (verified == UserService.STATE_INVALID){
+                    displayInvalidPassword();
+                }
+            });
+        }
+
+
         return binding.getRoot();
     }
 
@@ -52,9 +75,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     binding.txtPassword.getEditText().getText().toString(),getContext());
 
             viewModel.verified.observe(requireActivity(),verified -> {
-                if (verified){
+                Log.d("login","Called Observe");
+                if (verified == UserService.STATE_VERIFIED){
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
+                    sharedPreferences.edit().putString("username",binding.txtUsername.getEditText().getText().toString()).apply();
+                    sharedPreferences.edit().putString("password",binding.txtPassword.getEditText().getText().toString()).apply();
                     viewModel.showMenu();
-                }else{
+                }else if (verified == UserService.STATE_INVALID){
                     binding.txtPassword.getEditText().setText("");
                     displayInvalidPassword();
                 }
