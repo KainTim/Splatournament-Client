@@ -32,7 +32,8 @@ public class MainViewModel extends ViewModel {
     private final TournamentService tournamentService = TournamentService.getInstance();
     public LiveData<Boolean> registerDone = userService.registerDone;
     public LiveData<Integer> verified = userService.verified;
-    public LiveData<List<Tournament>> tournaments = tournamentService.tournaments;
+    public LiveData<Integer> tournamentsState = tournamentService.tournamentsState;
+    public List<Tournament> tournaments = tournamentService.tournaments;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -58,5 +59,9 @@ public class MainViewModel extends ViewModel {
 
     public void logout() {
         userService.logout();
+    }
+
+    public void getCurrentTournaments(String username, String password, Context context) {
+        tournamentService.getCurrentTournaments(username,password,context);
     }
 }

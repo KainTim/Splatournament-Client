@@ -44,31 +44,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         binding.btnLogin.setOnClickListener(this);
         binding.btnLoginRegister.setOnClickListener(this);
         viewModel.verified.removeObservers(requireActivity());
-        /*
-        SharedPreferences saveLogin = requireContext().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
-        String username = "";
-        String password = "";
-        if (    !(
-                (username = saveLogin.getString("username", "")).isEmpty() ||
-                (password = saveLogin.getString("password", "")).isEmpty())){
-            viewModel.verifyLogin(username,
-                    password,getContext());
-            viewModel.verified.observe(requireActivity(),verified -> {
-                if (verified==UserService.STATE_VERIFIED){
-                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
-                    sharedPreferences.edit().putString("username",binding.txtUsername.getEditText().getText().toString()).apply();
-                    sharedPreferences.edit().putString("password",binding.txtPassword.getEditText().getText().toString()).apply();
-                    viewModel.showMenu();
-                }else if (verified == UserService.STATE_INVALID){
-                    binding.txtPassword.getEditText().setText("");
-                    displayInvalidPassword();
-                }
-            });
-        }
-        */
+
         viewModel.verified.observe(requireActivity(),verified -> {
             if (verified==UserService.STATE_VERIFIED){
-                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("savedLogin", Context.MODE_PRIVATE);
                 sharedPreferences.edit().putString("username",binding.txtUsername.getEditText().getText().toString()).apply();
                 sharedPreferences.edit().putString("password",binding.txtPassword.getEditText().getText().toString()).apply();
                 viewModel.showMenu();

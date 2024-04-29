@@ -12,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentHomeBinding;
+import com.kainzt.splatournament_client.services.TournamentService;
+import com.kainzt.splatournament_client.services.UserService;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, Toolbar.OnMenuItemClickListener {
@@ -39,18 +42,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Tool
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container,false);
+
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+
             binding.cvMenuTournament.setOnClickListener(this);
             binding.cvMenuLeaderboards.setOnClickListener(this);
             binding.cvMenuWeapons.setOnClickListener(this);
             binding.tbHome.setOnMenuItemClickListener(this);
+
+        viewModel.tournamentsState.observe(requireActivity(),integer -> {
+            if (integer == TournamentService.STATE_SUCCESS){
+                viewModel.showTournamentList();
+            }
+            if (integer ==TournamentService.STATE_INVALID){
+                Toast toast = new Toast(requireContext());
+                toast.setText("There was a problem accessing the Tournaments, Please Try again Later!");
+                toast.show();
+            }
+        });
         return binding.getRoot();
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.cvMenuTournament){
-            viewModel.showTournamentList();
+            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("savedLogin", Context.MODE_PRIVATE);
+            String username = sharedPreferences.getString("username", "");
+            String password = sharedPreferences.getString("password", "");
+            viewModel.getCurrentTournaments(username,password,requireActivity());
         }
         if (v.getId() == R.id.cvMenuLeaderboards){
 
