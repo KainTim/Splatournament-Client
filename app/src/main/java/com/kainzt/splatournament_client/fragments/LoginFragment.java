@@ -43,9 +43,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         binding.btnLogin.setOnClickListener(this);
         binding.btnLoginRegister.setOnClickListener(this);
-
-
-        SharedPreferences saveLogin = getContext().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
+        viewModel.verified.removeObservers(requireActivity());
+        /*
+        SharedPreferences saveLogin = requireContext().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
         String username = "";
         String password = "";
         if (    !(
@@ -55,14 +55,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     password,getContext());
             viewModel.verified.observe(requireActivity(),verified -> {
                 if (verified==UserService.STATE_VERIFIED){
+                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
+                    sharedPreferences.edit().putString("username",binding.txtUsername.getEditText().getText().toString()).apply();
+                    sharedPreferences.edit().putString("password",binding.txtPassword.getEditText().getText().toString()).apply();
                     viewModel.showMenu();
                 }else if (verified == UserService.STATE_INVALID){
+                    binding.txtPassword.getEditText().setText("");
                     displayInvalidPassword();
                 }
             });
         }
-
-
+        */
+        viewModel.verified.observe(requireActivity(),verified -> {
+            if (verified==UserService.STATE_VERIFIED){
+                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
+                sharedPreferences.edit().putString("username",binding.txtUsername.getEditText().getText().toString()).apply();
+                sharedPreferences.edit().putString("password",binding.txtPassword.getEditText().getText().toString()).apply();
+                viewModel.showMenu();
+                viewModel.verified.removeObservers(requireActivity());
+            }else if (verified == UserService.STATE_INVALID){
+                binding.txtPassword.getEditText().setText("");
+                displayInvalidPassword();
+            }
+        });
         return binding.getRoot();
     }
 
@@ -73,22 +88,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             Log.d("Clicklistener","got called");
             viewModel.verifyLogin(binding.txtUsername.getEditText().getText().toString(),
                     binding.txtPassword.getEditText().getText().toString(),getContext());
-
-            viewModel.verified.observe(requireActivity(),verified -> {
-                Log.d("login","Called Observe");
-                if (verified == UserService.STATE_VERIFIED){
-                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("saveLogin", Context.MODE_PRIVATE);
-                    sharedPreferences.edit().putString("username",binding.txtUsername.getEditText().getText().toString()).apply();
-                    sharedPreferences.edit().putString("password",binding.txtPassword.getEditText().getText().toString()).apply();
-                    viewModel.showMenu();
-                }else if (verified == UserService.STATE_INVALID){
-                    binding.txtPassword.getEditText().setText("");
-                    displayInvalidPassword();
-                }
-            });
-
-        }
-        if (v.getId() == R.id.btnLoginRegister){
+        } else if (v.getId() == R.id.btnLoginRegister){
             viewModel.showRegister();
         }
     }

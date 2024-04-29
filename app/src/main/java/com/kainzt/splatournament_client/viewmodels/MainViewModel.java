@@ -25,7 +25,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_REGISTER = 1;
     public static final int SHOW_MENU = 2;
     public static final int SHOW_TOURNAMENT_LIST = 3;
-    public static final String SERVER_IP = "http://192.168.60.14:4711";
+    public static final String SERVER_IP = "http://192.168.60.21:4711";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
     private final UserService userService = UserService.getInstance();
@@ -56,4 +56,7 @@ public class MainViewModel extends ViewModel {
         userService.addUser(username,password,context);
     }
 
+    public void logout() {
+        userService.logout();
+    }
 }

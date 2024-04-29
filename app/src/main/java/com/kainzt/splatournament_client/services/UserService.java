@@ -58,4 +58,8 @@ public class UserService {
             requestQueue = Volley.newRequestQueue(context);
         }
     }
+
+    public void logout() {
+        _verified.postValue(STATE_INITIAL);
+    }
 }

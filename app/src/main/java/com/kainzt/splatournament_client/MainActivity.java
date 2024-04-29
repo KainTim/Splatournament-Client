@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 case 3: fragmentTransaction.replace(R.id.clMain, TournamentFragment.newInstance(1))
                         .addToBackStack(null);
                     break;
-                default: fragmentTransaction.replace(R.id.clMain,LoginFragment.newInstance());
             }
             fragmentTransaction.commit();
         });

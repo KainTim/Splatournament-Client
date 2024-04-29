@@ -39,6 +39,24 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         binding.btnRegister.setOnClickListener(this);
         binding.btnRegisterLogin.setOnClickListener(this);
+        viewModel.verified.removeObservers(requireActivity());
+
+        viewModel.registerDone.observe(requireActivity(),result ->{
+            if (result){
+                String username = binding.txtRegisterUserName.getEditText().getText().toString();
+                String password = binding.txtRegisterPassword.getEditText().getText().toString();
+                viewModel.verifyLogin(username,password,getContext());
+            }else {
+                displayAccountAlreadyExists();
+            }
+        } );
+        viewModel.verified.observe(requireActivity(), verified -> {
+            if (verified == UserService.STATE_VERIFIED){
+                viewModel.showMenu();
+                viewModel.verified.removeObservers(requireActivity());
+            }
+        });
+
 
         return binding.getRoot();
     }
@@ -50,22 +68,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             String username = binding.txtRegisterUserName.getEditText().getText().toString();
             String password = binding.txtRegisterPassword.getEditText().getText().toString();
             viewModel.addUser(username, password, getContext());
-
-            viewModel.registerDone.observe(requireActivity(),result ->{
-                if (result){
-                    viewModel.verifyLogin(username,password,getContext());
-                    FragmentActivity fragmentActivity = getActivity();
-                    if (fragmentActivity!=null){
-                        viewModel.verified.observe(fragmentActivity, verified -> {
-                            if (verified == UserService.STATE_VERIFIED){
-                                viewModel.showMenu();
-                            }
-                        });
-                    }
-                }else {
-                    displayAccountAlreadyExists();
-                }
-            } );
         }
         if (v.getId()==R.id.btnRegisterLogin){
             viewModel.showLogin();
