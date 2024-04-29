@@ -92,13 +92,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="100dp"
         android:text="@string/register"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvRegister"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
@@ -106,11 +107,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/already_have_an_account"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnRegisterLogin"
@@ -119,9 +120,9 @@
         android:layout_marginEnd="20dp"
         android:text="@string/login"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAlreadyAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+        app:layout_constraintTop_toTopOf="@+id/tvAlreadyAccount" />
 
     <TextView
         android:id="@+id/tvAccountAlreadyExists"
