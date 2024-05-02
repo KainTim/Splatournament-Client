@@ -18,7 +18,7 @@ import com.kainzt.splatournament_client.databinding.FragmentTournamentBinding;
 import com.kainzt.splatournament_client.databinding.FragmentTournamentListBinding;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
-public class TournamentFragment extends Fragment {
+public class TournamentFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private MainViewModel viewModel;
@@ -62,6 +62,14 @@ public class TournamentFragment extends Fragment {
             view.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
         view.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments));
+        binding.fabCreateTournament.setOnClickListener(this);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.fabCreateTournament){
+            viewModel.showCreateTournament();
+        }
     }
 }

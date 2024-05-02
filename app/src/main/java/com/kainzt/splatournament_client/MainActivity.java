@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.kainzt.splatournament_client.fragments.CreateTournamentFragment;
 import com.kainzt.splatournament_client.fragments.HomeFragment;
 import com.kainzt.splatournament_client.fragments.LoginFragment;
 import com.kainzt.splatournament_client.fragments.RegisterFragment;
@@ -32,13 +33,15 @@ public class MainActivity extends AppCompatActivity {
         viewModel.state.observe(this,state ->{
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (state){
-                case 0: fragmentTransaction.replace(R.id.clMain, LoginFragment.newInstance());
+                case MainViewModel.SHOW_LOGIN: fragmentTransaction.replace(R.id.clMain, LoginFragment.newInstance());
                     break;
-                case 1: fragmentTransaction.replace(R.id.clMain, RegisterFragment.newInstance());
+                case MainViewModel.SHOW_REGISTER: fragmentTransaction.replace(R.id.clMain, RegisterFragment.newInstance());
                     break;
-                case 2: fragmentTransaction.replace(R.id.clMain, HomeFragment.newInstance());
+                case MainViewModel.SHOW_MENU: fragmentTransaction.replace(R.id.clMain, HomeFragment.newInstance());
                     break;
-                case 3: fragmentTransaction.replace(R.id.clMain, TournamentFragment.newInstance(1))
+                case MainViewModel.SHOW_TOURNAMENT_LIST: fragmentTransaction.replace(R.id.clMain, TournamentFragment.newInstance(1))
+                        .addToBackStack(null);
+                case MainViewModel.SHOW_CREATE_TOURNAMENT: fragmentTransaction.replace(R.id.clMain, CreateTournamentFragment.newInstance())
                         .addToBackStack(null);
                     break;
             }
