@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentCreateTournamentBinding;
@@ -33,7 +34,12 @@ public class CreateTournamentFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentCreateTournamentBinding.inflate(inflater,container,false);
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-
+                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity(),
+                 android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+                 binding.txtAutoComplete.setAdapter(adapter);
         return binding.getRoot();
     }
+    private static final String[] COUNTRIES = new String[] {
+     };
+
 }
