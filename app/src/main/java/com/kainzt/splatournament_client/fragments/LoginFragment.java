@@ -45,14 +45,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         binding.btnLoginRegister.setOnClickListener(this);
         viewModel.verified.removeObservers(requireActivity());
 
-        viewModel.verified.observe(requireActivity(),verified -> {
-            if (verified==UserService.STATE_VERIFIED){
-                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("savedLogin", Context.MODE_PRIVATE);
-                sharedPreferences.edit().putString("username",binding.txtUsername.getEditText().getText().toString()).apply();
-                sharedPreferences.edit().putString("password",binding.txtPassword.getEditText().getText().toString()).apply();
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("savedLogin", Context.MODE_PRIVATE);
+
+        viewModel.verified.observe(requireActivity(), verified -> {
+            if (verified == UserService.STATE_VERIFIED) {
+                sharedPreferences.edit().putString("username", binding.txtUsername.getEditText().getText().toString()).apply();
+                sharedPreferences.edit().putString("password", binding.txtPassword.getEditText().getText().toString()).apply();
                 viewModel.showMenu();
                 viewModel.verified.removeObservers(requireActivity());
-            }else if (verified == UserService.STATE_INVALID){
+            } else if (verified == UserService.STATE_INVALID) {
                 binding.txtPassword.getEditText().setText("");
                 displayInvalidPassword();
             }
@@ -62,12 +63,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnLogin){
+        if (v.getId() == R.id.btnLogin) {
             if (!validateInput()) return;
-            Log.d("Clicklistener","got called");
+            Log.d("Clicklistener", "got called");
             viewModel.verifyLogin(binding.txtUsername.getEditText().getText().toString(),
-                    binding.txtPassword.getEditText().getText().toString(),getContext());
-        } else if (v.getId() == R.id.btnLoginRegister){
+                    binding.txtPassword.getEditText().getText().toString(), getContext());
+        } else if (v.getId() == R.id.btnLoginRegister) {
             viewModel.showRegister();
         }
     }
@@ -76,26 +77,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         binding.tvInvalidPassorUsrName.setVisibility(View.VISIBLE);
         new CountDownTimer(5000, 5000) {
 
-        public void onTick(long millisUntilFinished) {
-        }
-        public void onFinish() {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
                 binding.tvInvalidPassorUsrName.setVisibility(View.GONE);
-        }
+            }
         }.start();
     }
 
     private boolean validateInput() {
         boolean validInput = true;
-        if (binding.txtUsername.getEditText().getText().toString().isEmpty()){
+        if (binding.txtUsername.getEditText().getText().toString().isEmpty()) {
             binding.txtUsername.setError("Enter a Username!");
             validInput = false;
-        }else {
+        } else {
             binding.txtUsername.setErrorEnabled(false);
         }
-        if (binding.txtPassword.getEditText().getText().toString().isEmpty()){
+        if (binding.txtPassword.getEditText().getText().toString().isEmpty()) {
             binding.txtPassword.setError("Enter a Password!");
             validInput = false;
-        }else {
+        } else {
             binding.txtPassword.setErrorEnabled(false);
         }
         return validInput;

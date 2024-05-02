@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kainzt.splatournament_client.R;
+import com.kainzt.splatournament_client.databinding.FragmentTournamentBinding;
+import com.kainzt.splatournament_client.databinding.FragmentTournamentListBinding;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class TournamentFragment extends Fragment {
@@ -49,19 +51,17 @@ public class TournamentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tournament_list, container, false);
+        FragmentTournamentListBinding binding = FragmentTournamentListBinding.inflate(inflater, container, false);
+        RecyclerView view = binding.lstTournament;
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments));
+        Context context = view.getContext();
+        if (mColumnCount <= 1) {
+            view.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            view.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        return view;
+        view.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments));
+        return binding.getRoot();
     }
 }
