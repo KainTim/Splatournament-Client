@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case MainViewModel.SHOW_TOURNAMENT_LIST: fragmentTransaction.replace(R.id.clMain, TournamentFragment.newInstance(1))
                         .addToBackStack(null);
+                    break;
                 case MainViewModel.SHOW_CREATE_TOURNAMENT: fragmentTransaction.replace(R.id.clMain, CreateTournamentFragment.newInstance())
                         .addToBackStack(null);
                     break;
