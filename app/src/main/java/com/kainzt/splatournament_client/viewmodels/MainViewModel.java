@@ -29,6 +29,7 @@ public class MainViewModel extends ViewModel {
     public LiveData<Integer> verified = userService.verified;
     public LiveData<Integer> tournamentsState = tournamentService.tournamentsState;
     public List<Tournament> tournaments = tournamentService.tournaments;
+    public LiveData<Integer> tournamentCreationState = tournamentService.tournamentCreationState;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -64,8 +65,8 @@ public class MainViewModel extends ViewModel {
         _state.postValue(SHOW_CREATE_TOURNAMENT);
     }
 
-    public void createTournament(String tournamentName, int maxTeams, int bestOf, String tournamentStyle, String username, String password, Context context) {
+    public void createTournament(String tournamentName, int maxTeams, int bestOf, String tournamentStyle, String username, Context context) {
         tournamentService.createTournament(tournamentName,maxTeams,bestOf,tournamentStyle,
-                username, password,context);
+                username, context);
     }
 }
