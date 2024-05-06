@@ -73,6 +73,10 @@ public class TournamentService {
 
     }
 
+    public void createTournament(String tournamentName, int maxTeams, int bestOf, String tournamentStyle, String username, String password, Context context) {
+        initQueue(context);
+        String url = SERVER_IP+"/api/tournaments?username="+username+"&password="+password;
+    }
 
 
 

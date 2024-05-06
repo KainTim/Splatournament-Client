@@ -6,17 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.kainzt.splatournament_client.enums.TournamentStyle;
 import com.kainzt.splatournament_client.models.Tournament;
 import com.kainzt.splatournament_client.services.Hash;
 import com.kainzt.splatournament_client.services.TournamentService;
 import com.kainzt.splatournament_client.services.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +20,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_MENU = 2;
     public static final int SHOW_TOURNAMENT_LIST = 3;
     public static final int SHOW_CREATE_TOURNAMENT = 4;
-    public static final String SERVER_IP = "http://192.168.60.21:4711";
+    public static final String SERVER_IP = "http://192.168.103.100:4711";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
     private final UserService userService = UserService.getInstance();
@@ -68,5 +62,10 @@ public class MainViewModel extends ViewModel {
 
     public void showCreateTournament() {
         _state.postValue(SHOW_CREATE_TOURNAMENT);
+    }
+
+    public void createTournament(String tournamentName, int maxTeams, int bestOf, String tournamentStyle, String username, String password, Context context) {
+        tournamentService.createTournament(tournamentName,maxTeams,bestOf,tournamentStyle,
+                username, password,context);
     }
 }
