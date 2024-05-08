@@ -53,6 +53,10 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
             if (state == TournamentService.STATE_SUCCESS){
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Tournament created successfully", Snackbar.LENGTH_LONG);
                     snackbar.show();
+                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("savedLogin", Context.MODE_PRIVATE);
+                String username = sharedPreferences.getString("username","");
+                String password = sharedPreferences.getString("password","");
+                viewModel.getCurrentTournaments(username,password,requireActivity());
             }
             if (state == TournamentService.STATE_INVALID){
                 Snackbar snackbar = Snackbar.make(binding.getRoot(), "Error during Tournament Creation!",Snackbar.LENGTH_INDEFINITE);

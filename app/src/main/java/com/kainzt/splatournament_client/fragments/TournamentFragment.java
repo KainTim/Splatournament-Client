@@ -1,8 +1,11 @@
 package com.kainzt.splatournament_client.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,6 +25,7 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private MainViewModel viewModel;
+    private FragmentTournamentListBinding binding;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,9 +55,14 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentTournamentListBinding binding = FragmentTournamentListBinding.inflate(inflater, container, false);
+        binding = FragmentTournamentListBinding.inflate(inflater, container, false);
         RecyclerView view = binding.lstTournament;
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        if (viewModel.tournaments.isEmpty()){
+            binding.txtNoCurrentTournaments.setVisibility(View.VISIBLE);
+        }else {
+            binding.txtNoCurrentTournaments.setVisibility(View.INVISIBLE);
+        }
         // Set the adapter
         Context context = view.getContext();
         if (mColumnCount <= 1) {
@@ -71,5 +80,10 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
         if (v.getId() == R.id.fabCreateTournament){
             viewModel.showCreateTournament();
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);;
     }
 }
