@@ -68,7 +68,7 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnCreateTournament) {
-            validateInput();
+            if (!validateInput())return;
             SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("savedLogin", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
             viewModel.createTournament(
@@ -82,6 +82,53 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    private void validateInput() {
+    private boolean validateInput() {
+
+        boolean validInput = true;
+        if (binding.txtTournamentName.getEditText().getText().toString().isEmpty()) {
+            binding.txtTournamentName.setError("Enter a Name!");
+            validInput = false;
+        } else {
+            binding.txtTournamentName.setErrorEnabled(false);
+        }
+
+        boolean validBestOf = true;
+        try {
+            Integer.parseInt(binding.txtTournamentBestOf.getEditText().getText().toString());
+        }catch (NumberFormatException e){
+            validBestOf = false;
+        }
+        if (!validBestOf) {
+            binding.txtTournamentBestOf.setError("Enter a valid Number!");
+            validInput = false;
+        } else {
+            binding.txtTournamentBestOf.setErrorEnabled(false);
+        }
+
+        boolean validMaxTeams = true;
+        try {
+            int i = Integer.parseInt(binding.txtTournamentMaxTeams.getEditText().getText().toString());
+            if (i<0 ||i>100) validMaxTeams = false;
+        }catch (NumberFormatException e){
+            validMaxTeams = false;
+        }
+        if (!validMaxTeams) {
+            binding.txtTournamentMaxTeams.setError("Enter a valid Number!");
+            validInput = false;
+        } else {
+            binding.txtTournamentMaxTeams.setErrorEnabled(false);
+        }
+
+
+        if (!Arrays.stream(TournamentStyle.values())
+                .anyMatch(tournamentStyle -> tournamentStyle.toString().equals(
+                        binding.txtAutoTournamentStyle.getEditText().getText().toString()
+                ))) {
+            binding.txtAutoTournamentStyle.setError("Enter a valid Style!");
+            validInput = false;
+        } else {
+            binding.txtAutoTournamentStyle.setErrorEnabled(false);
+        }
+        return validInput;
     }
 }
