@@ -45,7 +45,7 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity(),
                 android.R.layout.simple_dropdown_item_1line,
-                Arrays.stream(TournamentStyle.values()).map(Enum::toString).toArray(String[]::new));
+                Arrays.stream(TournamentStyle.values()).filter(tournamentStyle -> tournamentStyle!=TournamentStyle.INVALID).map(Enum::toString).toArray(String[]::new));
         binding.txtAutoComplete.setAdapter(adapter);
         binding.btnCreateTournament.setOnClickListener(this);
         viewModel.tournamentCreationState.observe(requireActivity(),
@@ -60,7 +60,6 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
                 Snackbar snackbar = Snackbar.make(binding.getRoot(),
                         "Error during Tournament Creation!",Snackbar.LENGTH_INDEFINITE);
                 snackbar.show();
-
             }
         });
         return binding.getRoot();
@@ -76,7 +75,7 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
                     binding.txtTournamentName.getEditText().getText().toString(),
                     Integer.parseInt(binding.txtTournamentMaxTeams.getEditText().getText().toString()),
                     Integer.parseInt(binding.txtTournamentBestOf.getEditText().getText().toString()),
-                    binding.txtAutoTournamentStyle.getEditText().getText().toString(),
+                    TournamentStyle.getEnum(binding.txtAutoTournamentStyle.getEditText().getText().toString()).name(),
                     username,
                     requireActivity()
             );
