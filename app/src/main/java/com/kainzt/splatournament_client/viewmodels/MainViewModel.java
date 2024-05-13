@@ -20,6 +20,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_MENU = 2;
     public static final int SHOW_TOURNAMENT_LIST = 3;
     public static final int SHOW_CREATE_TOURNAMENT = 4;
+    public static final int SHOW_NEXT_SET = 5;
     public static final String SERVER_IP = "http://192.168.103.100:4711";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
@@ -30,6 +31,10 @@ public class MainViewModel extends ViewModel {
     public LiveData<Integer> tournamentsState = tournamentService.tournamentsState;
     public List<Tournament> tournaments = tournamentService.tournaments;
     public LiveData<Integer> tournamentCreationState = tournamentService.tournamentCreationState;
+
+    public String username = "";
+    public String currentTeam = "";
+    public int currentTournamentIndex ;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -68,5 +73,10 @@ public class MainViewModel extends ViewModel {
     public void createTournament(String tournamentName, int maxTeams, int bestOf, String tournamentStyle, String username, Context context) {
         tournamentService.createTournament(tournamentName,maxTeams,bestOf,tournamentStyle,
                 username, context);
+    }
+
+    public void showNextSetFragment(int position) {
+        currentTournamentIndex = position;
+        _state.postValue(SHOW_NEXT_SET);
     }
 }

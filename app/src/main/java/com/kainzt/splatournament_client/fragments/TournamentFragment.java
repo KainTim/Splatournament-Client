@@ -70,7 +70,7 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
         } else {
             view.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        view.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments));
+        view.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments,position -> viewModel.showNextSetFragment(position)));
         binding.fabCreateTournament.setOnClickListener(this);
         return binding.getRoot();
     }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.kainzt.splatournament_client.callbacks.MyOnEnterTournamentClickListener;
 import com.kainzt.splatournament_client.databinding.FragmentTournamentBinding;
 import com.kainzt.splatournament_client.models.Tournament;
 
@@ -14,9 +15,11 @@ import java.util.List;
 public class MyTournamentRecyclerViewAdapter extends RecyclerView.Adapter<MyTournamentRecyclerViewAdapter.ViewHolder> {
 
     private final List<Tournament> mValues;
+    private final MyOnEnterTournamentClickListener clickListener;
 
-    public MyTournamentRecyclerViewAdapter(List<Tournament> items) {
+    public MyTournamentRecyclerViewAdapter(List<Tournament> items, MyOnEnterTournamentClickListener clickListener) {
         mValues = items;
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class MyTournamentRecyclerViewAdapter extends RecyclerView.Adapter<MyTour
         holder.tvTournamentStyle.setText(mValues.get(position).getStyle().toString());
         holder.tvTournamentTeamCounter.setText(String.valueOf(mValues.get(position).getCurrentPlayerCount()));
         holder.tvTournamentCreatedBy.setText(mValues.get(position).getCreatedBy());
+        holder.btnTournamentEnter.setOnClickListener(v -> clickListener.onClick(position));
     }
 
     @Override

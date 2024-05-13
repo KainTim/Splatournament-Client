@@ -49,6 +49,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         viewModel.verified.observe(requireActivity(), verified -> {
             if (verified == UserService.STATE_VERIFIED) {
+                viewModel.username = binding.txtUsername.getEditText().getText().toString();
                 sharedPreferences.edit().putString("username", binding.txtUsername.getEditText().getText().toString()).apply();
                 sharedPreferences.edit().putString("password", binding.txtPassword.getEditText().getText().toString()).apply();
                 viewModel.showMenu();

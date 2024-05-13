@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.kainzt.splatournament_client.fragments.CreateTournamentFragment;
 import com.kainzt.splatournament_client.fragments.HomeFragment;
 import com.kainzt.splatournament_client.fragments.LoginFragment;
+import com.kainzt.splatournament_client.fragments.NextSetFragment;
 import com.kainzt.splatournament_client.fragments.RegisterFragment;
 import com.kainzt.splatournament_client.fragments.TournamentFragment;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                         .addToBackStack(null);
                     break;
                 case MainViewModel.SHOW_CREATE_TOURNAMENT: fragmentTransaction.replace(R.id.clMain, CreateTournamentFragment.newInstance())
+                        .addToBackStack(null);
+                case MainViewModel.SHOW_NEXT_SET: fragmentTransaction.replace(R.id.clMain, NextSetFragment.newInstance())
                         .addToBackStack(null);
                     break;
             }
