@@ -55,6 +55,7 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
                             "Tournament created successfully", Snackbar.LENGTH_LONG);
                     snackbar.show();
                     viewModel.showMenu();
+                    viewModel.tournamentCreationState.removeObservers(requireActivity());
             }
             if (state == TournamentService.STATE_INVALID){
                 Snackbar snackbar = Snackbar.make(binding.getRoot(),

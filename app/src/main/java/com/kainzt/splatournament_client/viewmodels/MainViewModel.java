@@ -21,7 +21,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_TOURNAMENT_LIST = 3;
     public static final int SHOW_CREATE_TOURNAMENT = 4;
     public static final int SHOW_NEXT_SET = 5;
-    public static final String SERVER_IP = "http://192.168.103.100:4711";
+    public static final String SERVER_IP = "http://192.168.29.100:4711";
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
     private final UserService userService = UserService.getInstance();
