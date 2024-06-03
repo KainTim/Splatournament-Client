@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,19 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
         }else {
             binding.txtNoCurrentTournaments.setVisibility(View.INVISIBLE);
         }
+
+        viewModel.joiningTournamentState.removeObservers(requireActivity());
+        viewModel.joiningTournamentState.observe(requireActivity(),integer ->
+                {
+                    Log.d("enter",integer+"");
+                    if (integer == -1||integer ==-2) {
+                        return;
+                    }
+                    viewModel.showNextSetFragment(1/*viewModel.tournaments.indexOf(
+                            viewModel.tournaments.stream()
+                                    .filter(tournament -> tournament.getId()==integer)
+                                    .findFirst().get())*/);
+                });
         // Set the adapter
         Context context = view.getContext();
         if (mColumnCount <= 1) {
@@ -70,7 +84,7 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
         } else {
             view.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        view.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments,position -> viewModel.showNextSetFragment(position)));
+        view.setAdapter(new MyTournamentRecyclerViewAdapter(viewModel.tournaments,position -> viewModel.enterTournament(viewModel.tournaments.get(position).getId(),viewModel.currentTeamId,requireActivity())));
         binding.fabCreateTournament.setOnClickListener(this);
         return binding.getRoot();
     }

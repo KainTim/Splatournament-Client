@@ -37,6 +37,7 @@ public class NextSetFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         binding.tbNextSet.setTitle(viewModel.tournaments.get(viewModel.currentTournamentIndex).getName());
         binding.tbNextSet.setSubtitle("Your Team: "+viewModel.currentTeam);
+        viewModel.enterTournament(viewModel.tournaments.get(viewModel.currentTournamentIndex).getId(),viewModel.currentTeamId,requireActivity());
         return binding.getRoot();
     }
 }

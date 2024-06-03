@@ -51,6 +51,8 @@ public class TournamentService {
     private final MutableLiveData<Integer> _tournamentCreationState = new MutableLiveData<>(STATE_INITIAL);
     public final LiveData<Integer> tournamentCreationState = _tournamentCreationState;
 
+    private final MutableLiveData<Integer> _joiningTournamentState = new MutableLiveData<>(-2);
+    public final LiveData<Integer> joiningTournamentState = _joiningTournamentState;
     public void getCurrentTournaments(String username, String password, Context context) {
 
         initQueue(context);
@@ -124,4 +126,35 @@ public class TournamentService {
         }
     }
 
+    public void enterTournament(int tournamentId, int currentTeamId, Context context) {
+        initQueue(context);
+        JSONObject data = new JSONObject();
+        try {
+            data.put("tournamentId",tournamentId);
+            data.put("teamId",currentTeamId);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        String url = SERVER_IP + "/api/teams/joinTournament";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
+                data,
+                jsonObject -> {
+                    if (jsonObject == null) {
+                        _joiningTournamentState.setValue(STATE_INVALID);
+                        _joiningTournamentState.setValue(-2);
+                        return;
+                    }
+                    Log.d("enter",jsonObject.toString());
+                    try {
+                        _joiningTournamentState.setValue(jsonObject.getInt("id"));
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    _joiningTournamentState.setValue(-2);
+                },
+                volleyError -> {
+                });
+        requestQueue.add(request);
+    }
 }
