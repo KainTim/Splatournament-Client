@@ -65,7 +65,7 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
             binding.txtNoCurrentTournaments.setVisibility(View.INVISIBLE);
         }
 
-        viewModel.joiningTournamentState.removeObservers(requireActivity());
+        //viewModel.joiningTournamentState.removeObservers(requireActivity());
         viewModel.joiningTournamentState.observe(requireActivity(),integer ->
                 {
                     Log.d("enter",integer+"");

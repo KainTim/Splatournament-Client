@@ -2,12 +2,17 @@ package com.kainzt.splatournament_client.models;
 
 import com.kainzt.splatournament_client.enums.TournamentStyle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tournament {
     int id;
     String name;
     String createdBy;
     TournamentStyle style;
     int currentPlayerCount;
+
+    List<List<String>> sets= new ArrayList<>();
 
     public Tournament() {
     }
@@ -57,5 +62,13 @@ public class Tournament {
 
     public void setStyle(TournamentStyle style) {
         this.style = style;
+    }
+
+    public List<List<String>> getSets() {
+        return sets;
+    }
+
+    public void setSets(List<List<String>> sets) {
+        this.sets = sets;
     }
 }

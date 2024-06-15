@@ -34,9 +34,10 @@ public class MainViewModel extends ViewModel {
     public LiveData<Integer> joiningTournamentState = tournamentService.joiningTournamentState;
 
     public String username = "";
-    public String currentTeam = "";
+    public String currentTeam = "our";
     public int currentTournamentIndex ;
     public int currentTeamId = 1;
+    public String otherTeam = "their";
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);

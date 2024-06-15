@@ -22,4 +22,7 @@
     <string name="createdbyname">CreatedByName</string>
     <string name="enter_tournament">Enter Tournament</string>
     <string name="profile">Profile</string>
+    <string name="edit_previous">Edit Previous</string>
+    <string name="edit_next">Edit Next</string>
+    <string name="we_won">We Won</string>
 </resources>
