@@ -21,7 +21,9 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_TOURNAMENT_LIST = 3;
     public static final int SHOW_CREATE_TOURNAMENT = 4;
     public static final int SHOW_NEXT_SET = 5;
-    public static final String SERVER_IP = "http://192.168.18.100:4711";
+    //Home
+    public static final String SERVER_IP = "http:/192.168.178.35:4711";
+
     private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
     public LiveData<Integer> state = _state;
     private final UserService userService = UserService.getInstance();
@@ -34,10 +36,11 @@ public class MainViewModel extends ViewModel {
     public LiveData<Integer> joiningTournamentState = tournamentService.joiningTournamentState;
 
     public String username = "";
-    public String currentTeam = "our";
-    public int currentTournamentIndex ;
+    public String currentTeam = "TeamTim";
+    public int currentTournamentId
+            ;
     public int currentTeamId = 1;
-    public String otherTeam = "their";
+    public String otherTeam = "TeamOthers";
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -78,8 +81,8 @@ public class MainViewModel extends ViewModel {
                 username, context);
     }
 
-    public void showNextSetFragment(int position) {
-        currentTournamentIndex = position;
+    public void showNextSetFragment(int tournamentId) {
+        currentTournamentId = tournamentId ;
         _state.postValue(SHOW_NEXT_SET);
     }
 

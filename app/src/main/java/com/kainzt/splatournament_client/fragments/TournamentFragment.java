@@ -66,15 +66,15 @@ public class TournamentFragment extends Fragment implements View.OnClickListener
         }
 
         //viewModel.joiningTournamentState.removeObservers(requireActivity());
-        viewModel.joiningTournamentState.observe(requireActivity(),integer ->
+        viewModel.joiningTournamentState.observe(requireActivity(),TournamentId ->
                 {
-                    Log.d("enter",integer+"");
-                    if (integer == -1||integer ==-2) {
+                    Log.d("enter",TournamentId+"");
+                    if (TournamentId < 0) {
                         return;
                     }
-                    viewModel.showNextSetFragment(1/*viewModel.tournaments.indexOf(
+                    viewModel.showNextSetFragment(TournamentId/*viewModel.tournaments.indexOf(
                             viewModel.tournaments.stream()
-                                    .filter(tournament -> tournament.getId()==integer)
+                                    .filter(tournament -> tournament.getId()==TournamentId)
                                     .findFirst().get())*/);
                 });
         // Set the adapter

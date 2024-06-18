@@ -43,7 +43,9 @@ public class NextSetFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         binding = FragmentNextSetBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        Tournament tournament = viewModel.tournaments.get(viewModel.currentTournamentIndex);
+        Tournament tournament = viewModel.tournaments.stream()
+                .filter(tournament1 -> tournament1.getId()== viewModel.currentTournamentId)
+                .findFirst().get();
         tournament.getSets().add(new ArrayList<>());
         setIndex = tournament.getSets().size() - 1;
         binding.tbNextSet.setTitle(tournament.getName());
@@ -62,7 +64,9 @@ public class NextSetFragment extends Fragment implements View.OnClickListener {
 
         }
         if (v.getId() == R.id.imgNextSet) {
-            Tournament tournament = viewModel.tournaments.get(viewModel.currentTournamentIndex);
+            Tournament tournament = viewModel.tournaments.stream()
+                    .filter(tournament1 -> tournament1.getId()== viewModel.currentTournamentId)
+                    .findFirst().get();
             List<String> strings = tournament.getSets().get(setIndex);
             if (isWin) {
                 strings.set(gameIndex, viewModel.currentTeam);

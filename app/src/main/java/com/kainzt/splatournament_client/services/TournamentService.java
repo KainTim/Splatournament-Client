@@ -142,7 +142,6 @@ public class TournamentService {
                 jsonObject -> {
                     if (jsonObject == null) {
                         _joiningTournamentState.setValue(STATE_INVALID);
-                        _joiningTournamentState.setValue(-2);
                         return;
                     }
                     Log.d("enter",jsonObject.toString());
