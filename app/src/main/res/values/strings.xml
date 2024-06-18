@@ -29,4 +29,6 @@
     <string name="join_team">Join Team</string>
     <string name="name_of_the_team">Name of the Team</string>
     <string name="create_and_join">Create and Join</string>
+    <string name="join">Join</string>
+    <string name="join_a_team">Join a Team</string>
 </resources>

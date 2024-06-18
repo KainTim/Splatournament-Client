@@ -35,6 +35,7 @@ public class MainViewModel extends ViewModel {
     public List<Tournament> tournaments = tournamentService.tournaments;
     public LiveData<Integer> tournamentCreationState = tournamentService.tournamentCreationState;
     public LiveData<Integer> joiningTournamentState = tournamentService.joiningTournamentState;
+    public boolean isCreateTeam;
 
     public String username = "";
     public String currentTeam = "TeamTim";
@@ -59,6 +60,11 @@ public class MainViewModel extends ViewModel {
         _state.postValue(SHOW_CREATE_TOURNAMENT);
     }
     public void showCreateTeam(){
+        isCreateTeam = true;
+        _state.postValue(SHOW_CREATE_TEAM);
+    }
+    public void showJoinTeam(){
+        isCreateTeam = false;
         _state.postValue(SHOW_CREATE_TEAM);
     }
     public void showNextSetFragment(int tournamentId) {
