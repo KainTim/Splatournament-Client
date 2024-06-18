@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentHomeBinding;
 import com.kainzt.splatournament_client.services.TournamentService;
-import com.kainzt.splatournament_client.services.UserService;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, Toolbar.OnMenuItemClickListener {
@@ -46,8 +45,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Tool
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
             binding.cvMenuTournament.setOnClickListener(this);
-            binding.cvMenuLeaderboards.setOnClickListener(this);
-            binding.cvMenuWeapons.setOnClickListener(this);
+            binding.cvMenuCreateTeam.setOnClickListener(this);
+            binding.cvMenuJoinTeam.setOnClickListener(this);
             binding.tbHome.setOnMenuItemClickListener(this);
 
         viewModel.tournamentsState.observe(requireActivity(),integer -> {
@@ -71,10 +70,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Tool
             String password = sharedPreferences.getString("password", "");
             viewModel.getCurrentTournaments(username,password,requireActivity());
         }
-        if (v.getId() == R.id.cvMenuLeaderboards){
+        if (v.getId() == R.id.cvMenuCreateTeam){
 
         }
-        if (v.getId() == R.id.cvMenuWeapons){
+        if (v.getId() == R.id.cvMenuJoinTeam){
 
         }
     }
