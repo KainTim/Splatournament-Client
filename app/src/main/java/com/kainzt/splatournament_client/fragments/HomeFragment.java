@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Tool
             viewModel.getCurrentTournaments(username,password,requireActivity());
         }
         if (v.getId() == R.id.cvMenuCreateTeam){
-
+            viewModel.showCreateTeam();
         }
         if (v.getId() == R.id.cvMenuJoinTeam){
 

@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.kainzt.splatournament_client.fragments.CreateTeamFragment;
 import com.kainzt.splatournament_client.fragments.CreateTournamentFragment;
 import com.kainzt.splatournament_client.fragments.HomeFragment;
 import com.kainzt.splatournament_client.fragments.LoginFragment;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                         .addToBackStack(null);
                     break;
                 case MainViewModel.SHOW_NEXT_SET: fragmentTransaction.replace(R.id.clMain, NextSetFragment.newInstance())
+                        .addToBackStack(null);
+                    break;
+                case MainViewModel.SHOW_CREATE_TEAM: fragmentTransaction.replace(R.id.clMain, CreateTeamFragment.newInstance())
                         .addToBackStack(null);
                     break;
             }

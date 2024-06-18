@@ -21,6 +21,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_TOURNAMENT_LIST = 3;
     public static final int SHOW_CREATE_TOURNAMENT = 4;
     public static final int SHOW_NEXT_SET = 5;
+    public static final int SHOW_CREATE_TEAM = 6;
     //Home
     public static final String SERVER_IP = "http:/192.168.178.35:4711";
 
@@ -54,6 +55,16 @@ public class MainViewModel extends ViewModel {
     public void showTournamentList(){
         _state.postValue(SHOW_TOURNAMENT_LIST);
     }
+    public void showCreateTournament() {
+        _state.postValue(SHOW_CREATE_TOURNAMENT);
+    }
+    public void showCreateTeam(){
+        _state.postValue(SHOW_CREATE_TEAM);
+    }
+    public void showNextSetFragment(int tournamentId) {
+        currentTournamentId = tournamentId ;
+        _state.postValue(SHOW_NEXT_SET);
+    }
 
     public void verifyLogin(String username, String password, Context context){
         password = Hash.encode(password);
@@ -72,19 +83,11 @@ public class MainViewModel extends ViewModel {
         tournamentService.getCurrentTournaments(username,password,context);
     }
 
-    public void showCreateTournament() {
-        _state.postValue(SHOW_CREATE_TOURNAMENT);
-    }
-
     public void createTournament(String tournamentName, int maxTeams, int bestOf, String tournamentStyle, String username, Context context) {
         tournamentService.createTournament(tournamentName,maxTeams,bestOf,tournamentStyle,
                 username, context);
     }
 
-    public void showNextSetFragment(int tournamentId) {
-        currentTournamentId = tournamentId ;
-        _state.postValue(SHOW_NEXT_SET);
-    }
 
     public void enterTournament(int tournamentId, int currentTeamId, Context context) {
         tournamentService.enterTournament(tournamentId,currentTeamId,context);
