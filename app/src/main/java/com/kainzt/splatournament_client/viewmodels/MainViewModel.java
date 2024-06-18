@@ -6,12 +6,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.kainzt.splatournament_client.callbacks.MyOnTeamCreatedCallback;
 import com.kainzt.splatournament_client.models.Tournament;
 import com.kainzt.splatournament_client.services.Hash;
+import com.kainzt.splatournament_client.services.TeamService;
 import com.kainzt.splatournament_client.services.TournamentService;
 import com.kainzt.splatournament_client.services.UserService;
 
 import java.util.List;
+
+import javax.security.auth.callback.Callback;
 
 
 public class MainViewModel extends ViewModel {
@@ -25,22 +29,25 @@ public class MainViewModel extends ViewModel {
     //Home
     public static final String SERVER_IP = "http:/192.168.178.35:4711";
 
-    private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
-    public LiveData<Integer> state = _state;
+
     private final UserService userService = UserService.getInstance();
     private final TournamentService tournamentService = TournamentService.getInstance();
+    private final TeamService teamService = TeamService.getInstance();
+
+    private final MutableLiveData<Integer> _state = new MutableLiveData<>(SHOW_LOGIN);
+
+    public LiveData<Integer> state = _state;
     public LiveData<Boolean> registerDone = userService.registerDone;
     public LiveData<Integer> verified = userService.verified;
     public LiveData<Integer> tournamentsState = tournamentService.tournamentsState;
     public List<Tournament> tournaments = tournamentService.tournaments;
     public LiveData<Integer> tournamentCreationState = tournamentService.tournamentCreationState;
     public LiveData<Integer> joiningTournamentState = tournamentService.joiningTournamentState;
-    public boolean isCreateTeam;
 
+    public boolean isCreateTeam;
     public String username = "";
     public String currentTeam = "TeamTim";
-    public int currentTournamentId
-            ;
+    public int currentTournamentId;
     public int currentTeamId = 1;
     public String otherTeam = "TeamOthers";
 
@@ -97,5 +104,13 @@ public class MainViewModel extends ViewModel {
 
     public void enterTournament(int tournamentId, int currentTeamId, Context context) {
         tournamentService.enterTournament(tournamentId,currentTeamId,context);
+    }
+
+    public void createTeam(String teamname, String username, String password, Context context, MyOnTeamCreatedCallback callback) {
+        teamService.createTeam(teamname,username,password,context,callback);
+    }
+
+    public void joinTeam(String teamname, String username, String password, Context context, MyOnTeamCreatedCallback callback) {
+        //teamService.joinTeam(teamname,username,password,context,callback);
     }
 }
