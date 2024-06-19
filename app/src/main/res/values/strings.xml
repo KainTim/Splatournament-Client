@@ -32,4 +32,6 @@
     <string name="join">Join</string>
     <string name="join_a_team">Join a Team</string>
     <string name="finish">Finish</string>
+    <string name="results">Results:</string>
+    <string name="home">Home</string>
 </resources>

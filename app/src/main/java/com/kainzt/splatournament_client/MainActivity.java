@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 case MainViewModel.SHOW_CREATE_TEAM: fragmentTransaction.replace(R.id.clMain, CreateTeamFragment.newInstance())
                         .addToBackStack(null);
                     break;
-                case MainViewModel.SHOW_RESULT: fragmentTransaction.replace(R.id.clMain, ResultFragment.newInstance());
+                case MainViewModel.SHOW_RESULT: fragmentTransaction.replace(R.id.clMain, ResultFragment.newInstance())
+                        .addToBackStack(null);
                     break;
             }
             fragmentTransaction.commit();

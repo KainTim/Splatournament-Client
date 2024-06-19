@@ -62,8 +62,10 @@ public class NextSetFragment extends Fragment implements View.OnClickListener, T
         tournament.setSets(sets);
         viewModel.otherTeam = "TestOpponent";
         List<Long> set = tournament.getSets().get(setIndex);
-        for (int i = 0; i < tournament.getBestOf(); i++) {
-            wins.add(true);
+        if (wins.size()<=0){
+            for (int i = 0; i < tournament.getBestOf(); i++) {
+                wins.add(true);
+            }
         }
         tournament.getSets().add(new ArrayList<>());
         binding.txtNextSetGameIndex.setText(String.format("Game %d/%d", gameIndex+1,tournament.getBestOf()));
