@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentCreateTeamBinding;
+import com.kainzt.splatournament_client.services.Hash;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
 public class CreateTeamFragment extends Fragment implements View.OnClickListener {
@@ -54,7 +55,7 @@ public class CreateTeamFragment extends Fragment implements View.OnClickListener
         if (v.getId()==R.id.btnCreateTeam){
             SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("savedLogin", Context.MODE_PRIVATE);
             String username = sharedPreferences.getString("username", "");
-            String password = sharedPreferences.getString("username", "");
+            String password = Hash.encode(sharedPreferences.getString("password", ""));
             String teamname = binding.txtCreateTeamName.getEditText().getText().toString();
             if (viewModel.isCreateTeam){
                 viewModel.createTeam(teamname,username,password,requireActivity(),success -> {

@@ -1,6 +1,7 @@
 package com.kainzt.splatournament_client.services;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,6 +51,7 @@ public class TeamService {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
                 data,
                 jsonObject -> {
+                    Log.d("createTeam", jsonObject.toString());
                     try {
                         if (!jsonObject.getString("username").equals("null")) {
                             callback.onCalled(true);
