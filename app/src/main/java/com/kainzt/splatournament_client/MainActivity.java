@@ -16,6 +16,7 @@ import com.kainzt.splatournament_client.fragments.HomeFragment;
 import com.kainzt.splatournament_client.fragments.LoginFragment;
 import com.kainzt.splatournament_client.fragments.NextSetFragment;
 import com.kainzt.splatournament_client.fragments.RegisterFragment;
+import com.kainzt.splatournament_client.fragments.ResultFragment;
 import com.kainzt.splatournament_client.fragments.TournamentFragment;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case MainViewModel.SHOW_CREATE_TEAM: fragmentTransaction.replace(R.id.clMain, CreateTeamFragment.newInstance())
                         .addToBackStack(null);
+                    break;
+                case MainViewModel.SHOW_RESULT: fragmentTransaction.replace(R.id.clMain, ResultFragment.newInstance());
                     break;
             }
             fragmentTransaction.commit();

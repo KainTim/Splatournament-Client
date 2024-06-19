@@ -2,10 +2,12 @@ package com.kainzt.splatournament_client.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,7 +20,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NextSetFragment extends Fragment implements View.OnClickListener {
+public class NextSetFragment extends Fragment implements View.OnClickListener, Toolbar.OnMenuItemClickListener {
     private FragmentNextSetBinding binding;
     private MainViewModel viewModel;
     private int setIndex = 0;
@@ -71,6 +73,7 @@ public class NextSetFragment extends Fragment implements View.OnClickListener {
         binding.btnNextSetGoNext.setOnClickListener(this);
         binding.btnNextSetEditPrevious.setOnClickListener(this);
         binding.imgNextSet.setOnClickListener(this);
+        binding.tbNextSet.setOnMenuItemClickListener(this);
         return binding.getRoot();
     }
 
@@ -112,5 +115,15 @@ public class NextSetFragment extends Fragment implements View.OnClickListener {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId()==R.id.mitNextSetFinish){
+            viewModel.wins = wins;
+            viewModel.showResult();
+            return true;
+        }
+        return false;
     }
 }

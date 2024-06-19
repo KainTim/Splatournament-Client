@@ -26,6 +26,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_CREATE_TOURNAMENT = 4;
     public static final int SHOW_NEXT_SET = 5;
     public static final int SHOW_CREATE_TEAM = 6;
+    public static final int SHOW_RESULT = 7;
 
     public static final String SERVER_IP = "http:/192.168.178.35:4711";
 
@@ -51,6 +52,7 @@ public class MainViewModel extends ViewModel {
     public Long currentTeamId;
     public String otherTeam = "TeamOthers";
     public Long otherTeamId;
+    public List<Boolean> wins;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);
@@ -66,6 +68,9 @@ public class MainViewModel extends ViewModel {
     }
     public void showCreateTournament() {
         _state.postValue(SHOW_CREATE_TOURNAMENT);
+    }
+    public void showResult() {
+        _state.postValue(SHOW_RESULT);
     }
     public void showCreateTeam(){
         isCreateTeam = true;
