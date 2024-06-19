@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cvBackgroundTint">#4e4edd</color>
+    <color name="primary">#de6624</color>
+    <color name="accent">#343bc4</color>
 </resources>

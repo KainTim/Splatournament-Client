@@ -2,8 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SplatournamentClient" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#de6624</item>
-        <item name="colorAccent">#343bc4</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorOnPrimary">@color/white</item>
     </style>
     <style name="Theme.SplatournamentClient" parent="Base.Theme.SplatournamentClient" />
 </resources>

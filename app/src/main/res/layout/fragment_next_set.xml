@@ -5,14 +5,14 @@
     android:id="@+id/clNextSetMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.NextSetFragment" >
+    android:backgroundTint="@color/design_default_color_on_primary"
+    tools:context=".fragments.NextSetFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvNextSetMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
         android:clipChildren="true"
         android:clipToPadding="true"
@@ -20,14 +20,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbNextSet"
-        app:layout_constraintVertical_bias="0.0">
+        tools:ignore="VisualLintBounds">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clNextSetSub"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="true"
-            android:clipToPadding="true">
+            android:clipToPadding="true"
+            android:contentDescription="TODO">
 
             <ImageView
                 android:id="@+id/imgNextSet"
@@ -35,37 +36,42 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:src="@drawable/victory"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
+    <ImageButton
         android:id="@+id/btnNextSetEditPrevious"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="6dp"
         android:layout_marginBottom="50dp"
+        android:backgroundTint="#de6624"
+        android:contentDescription="@string/edit_previous"
+        android:scaleType="fitCenter"
+        android:src="@drawable/arrow_back"
         android:text="@string/edit_previous"
         app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNextSetGoNext"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnNextSetGoNext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="50dp"
+        android:backgroundTint="#de6624"
+        android:contentDescription="@string/edit_next"
+        android:scaleType="fitCenter"
+        android:src="@drawable/arrow_forward"
         android:text="@string/edit_next"
         app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnNextSetEditPrevious" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbNextSet"
