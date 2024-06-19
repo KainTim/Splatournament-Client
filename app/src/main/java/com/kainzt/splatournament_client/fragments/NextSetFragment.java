@@ -14,15 +14,19 @@ import com.kainzt.splatournament_client.databinding.FragmentNextSetBinding;
 import com.kainzt.splatournament_client.models.Tournament;
 import com.kainzt.splatournament_client.viewmodels.MainViewModel;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NextSetFragment extends Fragment implements View.OnClickListener {
     private FragmentNextSetBinding binding;
     private MainViewModel viewModel;
-    private int setIndex;
-    private int gameIndex = 0;
+    private int setIndex = 0;
+    private Long gameIndex = 0L;
     private boolean isWin = true;
+    private Tournament tournament;
+    private boolean showOwnTeamName = true;
+    private List<Boolean> wins = new ArrayList<>();
 
     public NextSetFragment() {
         // Required empty public constructor
@@ -43,36 +47,70 @@ public class NextSetFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         binding = FragmentNextSetBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        Tournament tournament = viewModel.tournaments.stream()
+         tournament = viewModel.tournaments.stream()
                 .filter(tournament1 -> tournament1.getId()== viewModel.currentTournamentId)
                 .findFirst().get();
+
+        // TODO: 19.06.24 GENERALIZE AND GET FROM SERVER
+        ArrayList<List<Long>> sets = new ArrayList<>();
+        ArrayList<Long> set1 = new ArrayList<>();
+        set1.add(viewModel.currentTeamId);
+        set1.add(12L);
+        sets.add(set1);
+        tournament.setSets(sets);
+        viewModel.otherTeam = "TestOpponent";
+        List<Long> set = tournament.getSets().get(setIndex);
+        for (int i = 0; i < tournament.getBestOf(); i++) {
+            wins.add(true);
+        }
         tournament.getSets().add(new ArrayList<>());
-        setIndex = tournament.getSets().size() - 1;
+        binding.txtNextSetGameIndex.setText(String.format("Game %d/%d", gameIndex+1,tournament.getBestOf()));
         binding.tbNextSet.setTitle(tournament.getName());
         binding.tbNextSet.setSubtitle("Your Team: " + viewModel.currentTeam);
-        //viewModel.enterTournament(viewModel.tournaments.get(viewModel.currentTournamentIndex).getId(),viewModel.currentTeamId,requireActivity());
+        binding.tbNextSet.setOnClickListener(this);
+        binding.btnNextSetGoNext.setOnClickListener(this);
+        binding.btnNextSetEditPrevious.setOnClickListener(this);
         binding.imgNextSet.setOnClickListener(this);
         return binding.getRoot();
     }
 
     @Override
     public void onClick(View v) {
+        if (v.getId()==R.id.tbNextSet){
+            if (showOwnTeamName){
+                binding.tbNextSet.setSubtitle("Your Opponent: " + viewModel.otherTeam);
+            }else {
+                binding.tbNextSet.setSubtitle("Your Team: " + viewModel.currentTeam);
+            }
+            showOwnTeamName = !showOwnTeamName;
+        }
         if (v.getId() == R.id.btnNextSetGoNext) {
-
+            gameIndex++;
+            if (gameIndex>= tournament.getBestOf()){
+                gameIndex = tournament.getBestOf()-1;
+            }
+            binding.txtNextSetGameIndex.setText(String.format("Game %d/%d", gameIndex+1,tournament.getBestOf()));
+            binding.imgNextSet.setImageResource(getDrawableId(wins.get(Math.toIntExact(gameIndex))));
         }
         if (v.getId() == R.id.btnNextSetEditPrevious) {
-
+            gameIndex--;
+            if (gameIndex<0) gameIndex = 0L;
+            binding.txtNextSetGameIndex.setText(String.format("Game %d/%d", gameIndex+1,tournament.getBestOf()));
+            binding.imgNextSet.setImageResource(getDrawableId(wins.get(Math.toIntExact(gameIndex))));
         }
         if (v.getId() == R.id.imgNextSet) {
-            Tournament tournament = viewModel.tournaments.stream()
-                    .filter(tournament1 -> tournament1.getId()== viewModel.currentTournamentId)
-                    .findFirst().get();
-            List<String> strings = tournament.getSets().get(setIndex);
-            if (isWin) {
-                strings.set(gameIndex, viewModel.currentTeam);
-            } else {
-                strings.set(gameIndex, viewModel.otherTeam);
-            }
+            wins.set(Math.toIntExact(gameIndex),!wins.get(Math.toIntExact(gameIndex)));
+            binding.imgNextSet.setImageResource(getDrawableId(wins.get(Math.toIntExact(gameIndex))));
+        }
+    }
+    private int getDrawableId(boolean win) {
+        try {
+            Class res = R.drawable.class;
+            Field field = res.getField(win?"victory":"defeat");
+            int drawableId = field.getInt(null);
+            return drawableId;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -11,17 +11,19 @@ public class Tournament {
     String createdBy;
     TournamentStyle style;
     int currentPlayerCount;
+    Long bestOf;
 
-    List<List<String>> sets= new ArrayList<>();
+    List<List<Long>> sets= new ArrayList<>();
 
     public Tournament() {
     }
-    public Tournament(int id, String name, TournamentStyle style, int currentPlayerCount,String createdBy) {
+    public Tournament(int id, String name, TournamentStyle style, int currentPlayerCount,String createdBy,Long bestOf) {
         this.id = id;
         this.name = name;
         this.style = style;
         this.currentPlayerCount = currentPlayerCount;
         this.createdBy = createdBy;
+        this.bestOf = bestOf;
     }
 
     public int getId() {
@@ -64,11 +66,19 @@ public class Tournament {
         this.style = style;
     }
 
-    public List<List<String>> getSets() {
+    public List<List<Long>> getSets() {
         return sets;
     }
 
-    public void setSets(List<List<String>> sets) {
+    public void setSets(List<List<Long>> sets) {
         this.sets = sets;
+    }
+
+    public Long getBestOf() {
+        return bestOf;
+    }
+
+    public void setBestOf(Long bestOf) {
+        this.bestOf = bestOf;
     }
 }

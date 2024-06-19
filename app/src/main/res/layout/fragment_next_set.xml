@@ -16,7 +16,7 @@
         android:layout_marginEnd="32dp"
         android:clipChildren="true"
         android:clipToPadding="true"
-        app:layout_constraintBottom_toTopOf="@+id/btnNextSetGoNext"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbNextSet"
@@ -28,7 +28,8 @@
             android:layout_height="match_parent"
             android:clipChildren="true"
             android:clipToPadding="true"
-            android:contentDescription="TODO">
+            android:contentDescription="TODO"
+            tools:ignore="VisualLintBounds">
 
             <ImageView
                 android:id="@+id/imgNextSet"
@@ -43,35 +44,63 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <ImageButton
-        android:id="@+id/btnNextSetEditPrevious"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="#de6624"
-        android:contentDescription="@string/edit_previous"
-        android:scaleType="fitCenter"
-        android:src="@drawable/arrow_back"
-        android:text="@string/edit_previous"
-        app:cornerRadius="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnNextSetGoNext"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="50dp"
-        android:backgroundTint="#de6624"
-        android:contentDescription="@string/edit_next"
-        android:scaleType="fitCenter"
-        android:src="@drawable/arrow_forward"
-        android:text="@string/edit_next"
-        app:cornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/txtNextSetGameIndex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnNextSetGoNext"
+                app:layout_constraintStart_toEndOf="@+id/btnNextSetEditPrevious"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageButton
+                android:id="@+id/btnNextSetEditPrevious"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:backgroundTint="#de6624"
+                android:contentDescription="@string/edit_previous"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_back"
+                android:text="@string/edit_previous"
+                app:cornerRadius="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnNextSetGoNext"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:backgroundTint="#de6624"
+                android:contentDescription="@string/edit_next"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_forward"
+                android:text="@string/edit_next"
+                app:cornerRadius="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbNextSet"
@@ -83,7 +112,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/next_set_menu" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

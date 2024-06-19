@@ -50,6 +50,7 @@ public class MainViewModel extends ViewModel {
     public int currentTournamentId;
     public Long currentTeamId;
     public String otherTeam = "TeamOthers";
+    public Long otherTeamId;
 
     public void showLogin(){
         _state.postValue(SHOW_LOGIN);

@@ -67,12 +67,13 @@ public class TournamentService {
                     int id = object.getInt("id");
                     String name = object.getString("name");
                     String createdBy = object.getString("createdBy");
+                    Long bestOf = object.getLong("bestOf");
                     TournamentStyle style = TournamentStyle.INVALID;
                     if (!object.getString("style").equals("null")) {
                         style = TournamentStyle.valueOf(object.getString("style"));
                     }
                     int teamCount = object.getInt("teamCount");
-                    tournaments.add(new Tournament(id, name, style, teamCount, createdBy));
+                    tournaments.add(new Tournament(id, name, style, teamCount, createdBy,bestOf));
                 } catch (JSONException e) {
                     Log.e("Tournaments", "Parsing error" + jsonArray);
                     _tournamentsState.setValue(STATE_INVALID);
