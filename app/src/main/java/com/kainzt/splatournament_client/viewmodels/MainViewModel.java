@@ -26,8 +26,8 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_CREATE_TOURNAMENT = 4;
     public static final int SHOW_NEXT_SET = 5;
     public static final int SHOW_CREATE_TEAM = 6;
-    //Home
-    public static final String SERVER_IP = "http:/192.168.41.100:4711";
+
+    public static final String SERVER_IP = "http:/192.168.178.35:4711";
 
 
     private final UserService userService = UserService.getInstance();
@@ -48,7 +48,7 @@ public class MainViewModel extends ViewModel {
     public String username = "";
     public String currentTeam = "TeamTim";
     public int currentTournamentId;
-    public int currentTeamId = 1;
+    public Long currentTeamId;
     public String otherTeam = "TeamOthers";
 
     public void showLogin(){
@@ -102,7 +102,7 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    public void enterTournament(int tournamentId, int currentTeamId, Context context) {
+    public void enterTournament(int tournamentId, Long currentTeamId, Context context) {
         tournamentService.enterTournament(tournamentId,currentTeamId,context);
     }
 

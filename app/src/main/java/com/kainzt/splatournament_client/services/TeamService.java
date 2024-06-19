@@ -54,16 +54,16 @@ public class TeamService {
                     Log.d("createTeam", jsonObject.toString());
                     try {
                         if (!jsonObject.getString("username").equals("null")) {
-                            callback.onCalled(true);
+                            callback.onCalled(jsonObject.getLong("teamId"));
                             return;
                         }
                     } catch (JSONException e) {
-                        callback.onCalled(false);
+                        callback.onCalled(-1L);
                     }
-                    callback.onCalled(false);
+                    callback.onCalled(-1L);
                 },
                 volleyError -> {
-                    callback.onCalled(false);
+                    callback.onCalled(-1L);
                 });
         requestQueue.add(request);
     }
@@ -79,6 +79,7 @@ public class TeamService {
             throw new RuntimeException(e);
         }
         String url = SERVER_IP + "/api/teams/join";
+        Log.d("enter",data.toString());
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
                 data,
@@ -86,16 +87,16 @@ public class TeamService {
                     Log.d("joinTeam", jsonObject.toString());
                     try {
                         if (!jsonObject.getString("username").equals("null")) {
-                            callback.onCalled(true);
+                            callback.onCalled(jsonObject.getLong("teamId"));
                             return;
                         }
                     } catch (JSONException e) {
-                        callback.onCalled(false);
+                        callback.onCalled(-1L);
                     }
-                    callback.onCalled(false);
+                    callback.onCalled(-1L);
                 },
                 volleyError -> {
-                    callback.onCalled(false);
+                    callback.onCalled(-1L);
                 });
         requestQueue.add(request);
     }

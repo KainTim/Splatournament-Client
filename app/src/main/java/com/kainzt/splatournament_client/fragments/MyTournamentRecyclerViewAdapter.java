@@ -33,7 +33,6 @@ public class MyTournamentRecyclerViewAdapter extends RecyclerView.Adapter<MyTour
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.tvTournamentItemName.setText(mValues.get(position).getName());
-        holder.tvTournamentStyle.setText(mValues.get(position).getStyle().toString());
         holder.tvTournamentTeamCounter.setText(String.valueOf(mValues.get(position).getCurrentPlayerCount()));
         holder.tvTournamentCreatedBy.setText(mValues.get(position).getCreatedBy());
         holder.btnTournamentEnter.setOnClickListener(v -> clickListener.onClick(position));

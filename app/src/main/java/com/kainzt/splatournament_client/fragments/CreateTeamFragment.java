@@ -60,17 +60,23 @@ public class CreateTeamFragment extends Fragment implements View.OnClickListener
             String teamname = binding.txtCreateTeamName.getEditText().getText().toString();
             if (viewModel.isCreateTeam){
                 viewModel.createTeam(teamname,username,password,requireActivity(),success -> {
-                    if (!success){
+                    if (success<0){
                         Snackbar.make(binding.getRoot(),"Failed to create Team",BaseTransientBottomBar.LENGTH_LONG).show();
                     }else {
+                        viewModel.showMenu();
+                        viewModel.currentTeamId = success;
+                        viewModel.currentTeam = teamname;
                         Snackbar.make(binding.getRoot(),"Team Created Successfully",BaseTransientBottomBar.LENGTH_LONG).show();
                     }
                 });
             }else {
                 viewModel.joinTeam(teamname,username,password,requireActivity(),success -> {
-                    if (!success){
+                    if (success<0){
                         Snackbar.make(binding.getRoot(),"Failed to join Team", BaseTransientBottomBar.LENGTH_LONG).show();
                     }else {
+                        viewModel.showMenu();
+                        viewModel.currentTeamId = success;
+                        viewModel.currentTeam = teamname;
                         Snackbar.make(binding.getRoot(),"Team Joined Successfully",BaseTransientBottomBar.LENGTH_LONG).show();
                     }
                 });

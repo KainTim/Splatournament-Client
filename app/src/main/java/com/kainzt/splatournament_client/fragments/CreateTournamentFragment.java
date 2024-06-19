@@ -76,7 +76,7 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
                     binding.txtTournamentName.getEditText().getText().toString(),
                     Integer.parseInt(binding.txtTournamentMaxTeams.getEditText().getText().toString()),
                     Integer.parseInt(binding.txtTournamentBestOf.getEditText().getText().toString()),
-                    TournamentStyle.getEnum(binding.txtAutoTournamentStyle.getEditText().getText().toString()).name(),
+                    TournamentStyle.SWISS.name(),
                     username,
                     requireActivity()
             );
@@ -120,7 +120,7 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
             binding.txtTournamentMaxTeams.setErrorEnabled(false);
         }
 
-
+        /*
         if (!Arrays.stream(TournamentStyle.values())
                 .anyMatch(tournamentStyle -> tournamentStyle.toString().equals(
                         binding.txtAutoTournamentStyle.getEditText().getText().toString()
@@ -130,6 +130,7 @@ public class CreateTournamentFragment extends Fragment implements View.OnClickLi
         } else {
             binding.txtAutoTournamentStyle.setErrorEnabled(false);
         }
+        */
         return validInput;
     }
 }

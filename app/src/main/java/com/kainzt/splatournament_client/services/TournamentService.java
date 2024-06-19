@@ -126,7 +126,7 @@ public class TournamentService {
         }
     }
 
-    public void enterTournament(int tournamentId, int currentTeamId, Context context) {
+    public void enterTournament(int tournamentId, Long currentTeamId, Context context) {
         initQueue(context);
         JSONObject data = new JSONObject();
         try {
@@ -136,7 +136,7 @@ public class TournamentService {
             throw new RuntimeException(e);
         }
         String url = SERVER_IP + "/api/teams/joinTournament";
-
+        Log.d("enter",data.toString());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
                 data,
                 jsonObject -> {
