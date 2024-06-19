@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.kainzt.splatournament_client.R;
 import com.kainzt.splatournament_client.databinding.FragmentCreateTeamBinding;
@@ -60,13 +61,19 @@ public class CreateTeamFragment extends Fragment implements View.OnClickListener
             if (viewModel.isCreateTeam){
                 viewModel.createTeam(teamname,username,password,requireActivity(),success -> {
                     if (!success){
-                        Snackbar.make(binding.getRoot(),"Failed to create Team",5).show();
+                        Snackbar.make(binding.getRoot(),"Failed to create Team",BaseTransientBottomBar.LENGTH_LONG).show();
                     }else {
-                        Snackbar.make(binding.getRoot(),"Team Created Successfully",5).show();
+                        Snackbar.make(binding.getRoot(),"Team Created Successfully",BaseTransientBottomBar.LENGTH_LONG).show();
                     }
                 });
             }else {
-                //viewModel.joinTeam(teamname,username,password);
+                viewModel.joinTeam(teamname,username,password,requireActivity(),success -> {
+                    if (!success){
+                        Snackbar.make(binding.getRoot(),"Failed to join Team", BaseTransientBottomBar.LENGTH_LONG).show();
+                    }else {
+                        Snackbar.make(binding.getRoot(),"Team Joined Successfully",BaseTransientBottomBar.LENGTH_LONG).show();
+                    }
+                });
             }
         }
     }

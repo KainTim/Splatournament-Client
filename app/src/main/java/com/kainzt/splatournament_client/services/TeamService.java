@@ -67,4 +67,36 @@ public class TeamService {
                 });
         requestQueue.add(request);
     }
+
+    public void joinTeam(String teamName, String username, String password, Context context, MyOnTeamCreatedCallback callback) {
+        initQueue(context);
+        JSONObject data = new JSONObject();
+        try {
+            data.put("teamname",teamName);
+            data.put("username",(username));
+            data.put("password",password);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        String url = SERVER_IP + "/api/teams/join";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,
+                data,
+                jsonObject -> {
+                    Log.d("joinTeam", jsonObject.toString());
+                    try {
+                        if (!jsonObject.getString("username").equals("null")) {
+                            callback.onCalled(true);
+                            return;
+                        }
+                    } catch (JSONException e) {
+                        callback.onCalled(false);
+                    }
+                    callback.onCalled(false);
+                },
+                volleyError -> {
+                    callback.onCalled(false);
+                });
+        requestQueue.add(request);
+    }
 }

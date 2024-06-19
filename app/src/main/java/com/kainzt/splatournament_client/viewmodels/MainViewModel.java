@@ -111,6 +111,6 @@ public class MainViewModel extends ViewModel {
     }
 
     public void joinTeam(String teamname, String username, String password, Context context, MyOnTeamCreatedCallback callback) {
-        //teamService.joinTeam(teamname,username,password,context,callback);
+        teamService.joinTeam(teamname,username,password,context,callback);
     }
 }
