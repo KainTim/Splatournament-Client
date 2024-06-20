@@ -34,4 +34,6 @@
     <string name="finish">Finish</string>
     <string name="results">Results:</string>
     <string name="home">Home</string>
+    <string name="create_tournament">Create Tournament</string>
+    <string name="create_a_team">Create a Team</string>
 </resources>

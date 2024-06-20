@@ -41,7 +41,7 @@ public class CreateTeamFragment extends Fragment implements View.OnClickListener
         binding = FragmentCreateTeamBinding.inflate(inflater,container,false);
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         if (viewModel.isCreateTeam){
-            binding.tbCreateTeam.setTitle(R.string.create_team);
+            binding.tbCreateTeam.setTitle(R.string.create_a_team);
             binding.btnCreateTeam.setText(R.string.create_and_join);
         }else {
             binding.tbCreateTeam.setTitle(R.string.join_a_team);

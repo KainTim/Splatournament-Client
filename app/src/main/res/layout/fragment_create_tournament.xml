@@ -7,17 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CreateTournamentFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/create_tournament" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvCreateTournament"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="30dp"
         android:backgroundTint="@color/cvBackgroundTint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -109,7 +121,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
-        android:text="Create Tournament"
+        android:text="@string/create_tournament"
+        android:textColor="@color/cvBackgroundTint"
         android:textSize="20sp"
         app:cornerRadius="7dp"
         app:layout_constraintEnd_toEndOf="parent"

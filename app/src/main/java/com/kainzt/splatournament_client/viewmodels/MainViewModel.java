@@ -28,7 +28,7 @@ public class MainViewModel extends ViewModel {
     public static final int SHOW_CREATE_TEAM = 6;
     public static final int SHOW_RESULT = 7;
 
-    public static final String SERVER_IP = "http:/192.168.178.35:4711";
+    public static final String SERVER_IP = "http:/192.168.41.100:4711";
 
 
     private final UserService userService = UserService.getInstance();
